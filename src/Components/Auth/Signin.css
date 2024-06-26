@@ -1,0 +1,72 @@
+/* Signin.css */
+
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
+.containerSignin {
+  animation: fadeIn 1s ease-in-out;
+
+} 
+
+.signin-form {
+  padding: 20px;
+  max-width: 80vw;
+  min-height: 60vh;
+}
+
+.logoForm {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.logoForm i {
+  margin-right: 10px;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.iconForm {
+    position: absolute;
+    left: 7px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 25px;
+    border: 0px;
+  }
+.form-control {
+  padding-left: 40px;
+}
+.photoLogin{
+    min-height: 50vh;
+    width: 49.4vw;
+}
+
+.submit-btn {
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #007bff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .containerSignin {
+    margin: 8rem 0;
+  }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

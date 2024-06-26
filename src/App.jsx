@@ -10,6 +10,8 @@ import Store from './Redux/Story';
 import { Provider } from 'react-redux';
 import Signin from './Components/Auth/signin';
 import SignUp from './Components/Auth/signup';
+import Teacher from './Components/Auth/Teacher';
+import Student from './Components/Auth/Student';
 
 const routers = createBrowserRouter([
   {
@@ -21,6 +23,8 @@ const routers = createBrowserRouter([
       {index:true,element: <Landing /> ,errorElement:(<ErrorPage />)},
       { path: "signin", element: <Signin /> ,errorElement:(<ErrorPage />)},
       { path: "signup", element: <SignUp /> ,errorElement:(<ErrorPage />)},
+      { path: "teacher", element: <Teacher /> ,errorElement:(<ErrorPage />)},
+      { path: "student", element: <Student /> ,errorElement:(<ErrorPage />)},
 
     ],
     errorElement:(<ErrorPage />)

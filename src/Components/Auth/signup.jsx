@@ -1,16 +1,26 @@
-import React from 'react'
-import imgLogin from "../../assets/image2.png"
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './SignUp.css';
+
 function SignUp() {
   return (
-    <div className="row">
-      <div className="col-md-6">
-        <img src="" alt="" />
-      </div>
-      <div className="col-md-6 ">
-        <img src={imgLogin} alt="" />
+    <div className="signup-container">
+      <div className="signup-card">
+        <div className="signup-option">
+          <Link to="/teacher" className="signup-link">
+            <i className="fas fa-chalkboard-teacher signup-icon"></i>
+            معلم
+          </Link>
+        </div>
+        <div className="signup-option">
+          <Link to="/student" className="signup-link">
+            <i className="fas fa-user-graduate signup-icon"></i>
+            طالب
+          </Link>
+        </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default SignUp
+export default SignUp;
