@@ -1,0 +1,46 @@
+.footer {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.social-icons {
+    margin-bottom: 20px;
+}
+
+.social-icons a {
+    display: inline-block;
+    color: #333;
+    font-size: 24px;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+.social-icons a:hover {
+    color: #007bff;
+}
+
+.about-section {
+    margin-bottom: 20px;
+}
+
+.about-title {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.about-title i {
+    margin-left: 10px;
+}
+
+.copyright {
+    font-size: 14px;
+    color: #666;
+}
+
+@media (max-width: 768px) {
+    .social-icons {
+        justify-content: center;
+    }
+}
