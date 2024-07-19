@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './TeacherSignUp.css';
-import photoLogin from '../../assets/9829626.jpg';
+// import photoLogin from '../../assets/9829626.jpg';
 import axios from 'axios';
 
 function Teacher() {
