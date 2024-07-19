@@ -2,17 +2,18 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './TeacherSignUp.css';
 import photoLogin from '../../assets/9829626.jpg';
+import axios from 'axios';
 
 function Teacher() {
   const [formData, setFormData] = useState({
-    lastname: '',
-    firstname: '',
-    phone: '',
+    lastName: '',
+    firstName: '',
+    phoneNumber: '',
     email: '',
     password: '',
-    confirmPassword: '',
-    governorate: '',
-    userImg: null,
+    confirmPassword:'',
+    govenorate: '',
+    accountType: 2
   });
 
   const handleChange = (e) => {
@@ -23,32 +24,26 @@ function Teacher() {
     });
   };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setFormData({
-      ...formData,
-      userImg: file,
-    });
-  };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
+    console.log(formData);
+
     // Ensure passwords match before submission
     if (formData.password !== formData.confirmPassword) {
       alert('Passwords do not match');
       return;
     }
-
-    // Here you can submit formData to your backend or perform further actions
     console.log(formData);
-    // Example: You might use fetch or axios to send this data to your backend
-    // fetch('/api/teachers/register', {
-    //   method: 'POST',
-    //   body: formData
-    // })
-    // .then(response => response.json())
-    // .then(data => console.log('Success:', data))
-    // .catch(error => console.error('Error:', error));
+    const jsonData=JSON.stringify(formData)
+    console.log(jsonData);
+
+    try {
+    const response=await axios.post('http://localhost:5177/api/Account/register',jsonData)
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -63,18 +58,18 @@ function Teacher() {
             <div>
               <input
                 type="text"
-                name="lastname"
+                name="lastName"
                 placeholder="Last Name"
-                value={formData.lastname}
+                value={formData.lastName}
                 onChange={handleChange}
                 required
                 className='inputRegister'
               />
               <input
                 type="text"
-                name="firstname"
+                name="firstName"
                 placeholder="First Name"
-                value={formData.firstname}
+                value={formData.firstName}
                 onChange={handleChange}
                 required
                 className='inputRegister'
@@ -84,9 +79,9 @@ function Teacher() {
             <div>
               <input
                 type="tel"
-                name="phone"
+                name="phoneNumber"
                 placeholder="Phone"
-                value={formData.phone}
+                value={formData.phoneNumber}
                 onChange={handleChange}
                 required
                 className='inputRegister'
@@ -121,18 +116,10 @@ function Teacher() {
             />
             <input
               type="text"
-              name="governorate"
+              name="govenorate"
               placeholder="Governorate"
-              value={formData.governorate}
+              value={formData.govenorate}
               onChange={handleChange}
-              required
-              className='inputRegister'
-              />
-            <input
-              type="file"
-              name="userImg"
-              onChange={handleFileChange}
-              accept=".jpg, .jpeg, .png"
               required
               className='inputRegister'
               />

@@ -1,0 +1,53 @@
+/* CourseCard.css */
+.course-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 300px;
+    margin: 16px;
+    padding: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: rgb(9, 7, 7);
+
+}
+  .course-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .course-name {
+    font-size: 1.5em;
+    margin: 16px 0;
+  }
+  
+  .course-actions {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .edit-button, .delete-button ,.add-button{
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  .add-button {
+    background-color: #212F3D;
+    color: white;
+  }
+  .edit-button {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .delete-button {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .edit-button:hover, .delete-button:hover ,.edit-button:hover {
+    opacity: 0.8;
+  }
+  
