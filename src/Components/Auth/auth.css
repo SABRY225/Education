@@ -1,0 +1,280 @@
+/* Importing external font icons */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
+/* General Styles */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Sign In Styles */
+.containerSignin {
+  animation: fadeIn 1s ease-in-out;
+}
+
+.signin-form {
+  padding: 20px;
+  max-width: 80vw;
+  min-height: 60vh;
+}
+
+.logoForm {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.logoForm i {
+  margin-right: 10px;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.iconForm {
+  position: absolute;
+  left: 7px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+  font-size: 25px;
+  border: 0px;
+}
+
+.form-control {
+  padding-left: 40px;
+}
+
+.photoLogin {
+  min-height: 50vh;
+  width: 49.4vw;
+}
+
+.submit-btn {
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #007bff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .containerSignin {
+    margin: 8rem 0;
+  }
+}
+
+/* Sign Up Styles */
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  animation: fadeIn 1s ease-in-out;
+  padding: 50px;
+}
+
+.signup-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 100px;
+  border-radius: 15px;
+  background: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.signup-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.signup-option {
+  margin: 15px 0;
+}
+
+.signup-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20vw;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #333;
+  font-size: 40px;
+  font-weight: bold;
+  transition: color 0.3s, background-color 0.3s;
+  border-radius: 10px;
+}
+
+.signup-link i {
+  font-size: 40px;
+}
+
+.signup-link:hover {
+  color: #fff;
+  background-color: #007bff;
+}
+
+.signup-icon {
+  margin-right: 10px;
+  font-size: 24px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .signup-container {
+    padding: 10px;
+  }
+
+  .signup-card {
+    padding: 20px;
+  }
+
+  .signup-link {
+    width: 65vw;
+    font-size: 18px;
+  }
+
+  .signup-icon {
+    font-size: 20px;
+  }
+}
+
+/* OTP Sign Up Styles */
+.Otp-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url('../../assets/4212810.jpg');
+  background-color: #f4f4f4;
+}
+
+.card-register {
+  background-color: #ffffffba;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.inputRegister {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .card-register {
+    padding: 15px;
+    max-width: 90%;
+  }
+
+  .logoForm {
+    font-size: 20px;
+  }
+
+  .logoForm i {
+    font-size: 28px;
+  }
+
+  button {
+    font-size: 14px;
+  }
+}
+
+/* Teacher Styles */
+.Teacher-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  background: url('../../assets/4212810.jpg');
+  animation: fadeIn 1s ease-in-out;
+}
+
+.row {
+  margin: 0 !important; /* Override Bootstrap margin */
+}
+
+.card-register {
+  background-color: #ffffff9e;
+  border-radius: 15px;
+}
+
+.logoForm {
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.logoForm i {
+  margin-right: 10px;
+  color: #3f51b5; /* Primary color */
+}
+
+form {
+  padding: 20px;
+}
+
+.inputRegister {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 1rem;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #3f51b5;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+button[type="submit"]:hover {
+  background-color: #2c3e50; /* Darker shade of primary color */
+}
+
+.photoLogin {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}

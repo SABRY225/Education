@@ -1,0 +1,71 @@
+.Otp-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url('../../assets/4212810.jpg');
+    background-color: #f4f4f4;
+  }
+  
+  .card-register {
+    background-color: #ffffffba;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+  }
+  
+  .logoForm {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .logoForm i {
+    font-size: 32px;
+    color: #007bff;
+  }
+  
+  .inputRegister {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  @media (max-width: 768px) {
+    .card-register {
+      padding: 15px;
+      max-width: 90%;
+    }
+  
+    .logoForm {
+      font-size: 20px;
+    }
+  
+    .logoForm i {
+      font-size: 28px;
+    }
+  
+    button {
+      font-size: 14px;
+    }
+  }
+  

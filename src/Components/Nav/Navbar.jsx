@@ -1,4 +1,3 @@
-import React from 'react';
 import './Navbar.css'; // Make sure to import the CSS file
 import { Link } from 'react-router-dom';
 import userImg from '../../assets/image.png';
@@ -21,12 +20,12 @@ function Navbar() {
                     ) : (
                         <div className="col-md-9 register text-end">
                             <div className="col-6 col-md-3 m-1 mb-md-1">
-                                <Link to="./signin" className="btn-login">
+                                <Link to="/signin" className="btn-login">
                                     <i className="fas fa-sign-in-alt"></i> تسجيل الدخول
                                 </Link>
                             </div>
                             <div className="col-6 col-md-3 m-1">
-                                <Link to="./signup" className="btn-login">
+                                <Link to="/signup" className="btn-login">
                                     <i className="fas fa-user-plus"></i> انشاء حساب جديد
                                 </Link>
                             </div>

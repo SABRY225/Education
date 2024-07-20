@@ -1,19 +1,23 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import './TeacherSignUp.css';
-import photoLogin from '../../assets/image3.png';
+import  { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import './auth.css';
+import { useDispatch } from 'react-redux';
+import { signUpUser } from '../../Redux/actions/authActions';
+// import photoLogin from '../../assets/image3.png';
 
 function Student() {
   const [formData, setFormData] = useState({
-    lastname: '',
-    firstname: '',
-    phone: '',
-    email: '',
-    password: '',
+    accountType: 1,
     confirmPassword: '',
-    governorate: '',
-    userImg: null,
+    email: '',
+    firstName: '',
+    govenorate: '',
+    lastName: '',
+    password: '',
+    phoneNumber: ''
   });
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,32 +27,20 @@ function Student() {
     });
   };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setFormData({
-      ...formData,
-      userImg: file,
-    });
-  };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
+    console.log(formData);
+
     // Ensure passwords match before submission
     if (formData.password !== formData.confirmPassword) {
       alert('Passwords do not match');
       return;
     }
+    // const jsonData=JSON.stringify(formData)
+    await dispatch(signUpUser(formData));
+    navigate('/signup/verifyRegister');
 
-    // Here you can submit formData to your backend or perform further actions
-    console.log(formData);
-    // Example: You might use fetch or axios to send this data to your backend
-    // fetch('/api/teachers/register', {
-    //   method: 'POST',
-    //   body: formData
-    // })
-    // .then(response => response.json())
-    // .then(data => console.log('Success:', data))
-    // .catch(error => console.error('Error:', error));
   };
 
   return (
@@ -63,18 +55,18 @@ function Student() {
             <div>
               <input
                 type="text"
-                name="lastname"
+                name="lastName"
                 placeholder="Last Name"
-                value={formData.lastname}
+                value={formData.lastName}
                 onChange={handleChange}
                 required
                 className='inputRegister'
               />
               <input
                 type="text"
-                name="firstname"
+                name="firstName"
                 placeholder="First Name"
-                value={formData.firstname}
+                value={formData.firstName}
                 onChange={handleChange}
                 className='inputRegister'
                 required
@@ -84,9 +76,9 @@ function Student() {
             <div>
               <input
                 type="tel"
-                name="phone"
+                name="phoneNumber"
                 placeholder="Phone"
-                value={formData.phone}
+                value={formData.phoneNumber}
                 onChange={handleChange}
                 required
                 className='inputRegister'
@@ -121,9 +113,9 @@ function Student() {
               />
             <input
               type="text"
-              name="governorate"
-              placeholder="Governorate"
-              value={formData.governorate}
+              name="govenorate"
+              placeholder="Govenorate"
+              value={formData.govenorate}
               onChange={handleChange}
               required
               className='inputRegister'

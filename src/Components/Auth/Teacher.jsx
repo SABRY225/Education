@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './TeacherSignUp.css';
-// import photoLogin from '../../assets/9829626.jpg';
-import axios from 'axios';
+import './auth.css';
+import { useDispatch } from 'react-redux';
+import { signUpUser } from '../../Redux/actions/authActions';
 
 function Teacher() {
   const [formData, setFormData] = useState({
@@ -13,9 +13,9 @@ function Teacher() {
     password: '',
     confirmPassword:'',
     govenorate: '',
-    accountType: 2
+    accountType: 0
   });
-
+  const dispatch = useDispatch();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -34,16 +34,8 @@ function Teacher() {
       alert('Passwords do not match');
       return;
     }
-    console.log(formData);
     const jsonData=JSON.stringify(formData)
-    console.log(jsonData);
-
-    try {
-    const response=await axios.post('http://localhost:5177/api/Account/register',jsonData)
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
+    await dispatch(signUpUser(jsonData));
   };
 
   return (
