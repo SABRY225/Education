@@ -40,8 +40,34 @@ function CreateCourse() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await dispatch(Add_Course(formData));
-      console.log('Form submitted:', res);
+      const imageFile = formData.courseImage;
+  
+      // Prepare form data
+      const formDataToSend = new FormData();
+      formDataToSend.append('courseImage', imageFile);
+      Object.keys(formData).forEach(key => {
+        if (key !== 'courseImage') {
+          formDataToSend.append(key, formData[key]);
+        }
+      });
+  
+      // Send the data to the backend
+      const res = await fetch('http://localhost:5177/Course', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+        body: formDataToSend,
+      });
+  
+      if (!res.ok) {
+        const errorResponse = await res.json();
+        throw new Error(`Error: ${errorResponse.title} - ${JSON.stringify(errorResponse.errors)}`);
+      }
+  
+      const result = await res.json();
+      console.log('Form submitted:', result);
+  
       // Reset the form
       setFormData({
         Name: '',
@@ -53,7 +79,7 @@ function CreateCourse() {
       });
       setSelectedImage(null);
     } catch (error) {
-      console.error("Error submitting form:", error);
+      console.error("Error submitting form:", error.message);
     }
   };
 
