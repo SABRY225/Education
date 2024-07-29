@@ -1,12 +1,15 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { verifyOtpCode } from '../../Redux/actions/authActions';
 import './auth.css';
+import { useNavigate } from 'react-router-dom';
 
 function VerifyRegister() {
   const dispatch = useDispatch();
   const email = localStorage.getItem('email');
   const [otp, setOtp] = useState("");
+  const { loading, error } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
 
   const handleOtpChange = (e) => {
     setOtp(e.target.value);
@@ -14,7 +17,10 @@ function VerifyRegister() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await dispatch(verifyOtpCode({ email, otp }));
+    const res=await dispatch(verifyOtpCode({ email, otp }));
+    if (res) 
+    navigate('/signin');
+    
   };
 
   return (
@@ -37,8 +43,15 @@ function VerifyRegister() {
                 className="inputRegister"
               />
             </div>
-            <button type="submit">Verify</button>
+            {loading ? (
+              <button type="submit" disabled>
+                Verifying...
+              </button>
+            ) : (
+              <button type="submit">Verify</button>
+            )}
           </form>
+          {error && <div className="error">{error}</div>}
         </div>
       </div>
     </div>

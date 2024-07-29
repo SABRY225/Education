@@ -1,48 +1,54 @@
 // actions/courseActions.js
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axiosInstance from '../../api/axiosInstance'; // Adjust the path as needed
+import {
+  addCourse,
+  getCourses
+} from '../../api/courseApi'; // Adjust the import path as needed
 
-export const addCourse = createAsyncThunk('courses/addCourse', async (courseData) => {
-  const response = await axiosInstance.post('/courses', courseData);
+export const Add_Course = createAsyncThunk('Course/', async (courseData) => {
+  console.log(courseData);
+  const response = await addCourse(courseData);
   return response.data;
 });
 
-export const editCourse = createAsyncThunk('courses/editCourse', async (courseData) => {
+export const EditCourse = createAsyncThunk('courses/editCourse', async (courseData) => {
   const response = await axiosInstance.put(`/courses/${courseData.id}`, courseData);
   return response.data;
 });
 
-export const deleteCourse = createAsyncThunk('courses/deleteCourse', async (courseId) => {
+export const DeleteCourse = createAsyncThunk('courses/deleteCourse', async (courseId) => {
   await axiosInstance.delete(`/courses/${courseId}`);
   return courseId;
 });
 
-export const enrollCourse = createAsyncThunk('courses/enrollCourse', async (enrollmentData) => {
+export const EnrollCourse = createAsyncThunk('courses/enrollCourse', async (enrollmentData) => {
   const response = await axiosInstance.post('/courses/enroll', enrollmentData);
   return response.data;
 });
 
-export const getCourses = createAsyncThunk('courses/getCourses', async () => {
-  const response = await axiosInstance.get('/courses');
-  return response.data;
+export const GetCourses = createAsyncThunk('Course/all', async (token) => {
+  const response = await getCourses(token);
+  console.log(response);
+  return response;
 });
 
-export const getCourseById = createAsyncThunk('courses/getCourseById', async (courseId) => {
+export const GetCourseById = createAsyncThunk('courses/getCourseById', async (courseId) => {
   const response = await axiosInstance.get(`/courses/${courseId}`);
   return response.data;
 });
 
-export const getCoursesByTeacher = createAsyncThunk('courses/getCoursesByTeacher', async (teacherId) => {
+export const GetCoursesByTeacher = createAsyncThunk('courses/getCoursesByTeacher', async (teacherId) => {
   const response = await axiosInstance.get(`/courses/teacher/${teacherId}`);
   return response.data;
 });
 
-export const getNumOfStudentsInCourse = createAsyncThunk('courses/getNumOfStudentsInCourse', async (courseId) => {
+export const GetNumOfStudentsInCourse = createAsyncThunk('courses/getNumOfStudentsInCourse', async (courseId) => {
   const response = await axiosInstance.get(`/courses/${courseId}/students/count`);
   return response.data;
 });
 
-export const getNumOfCourses = createAsyncThunk('courses/getNumOfCourses', async () => {
+export const GetNumOfCourses = createAsyncThunk('courses/getNumOfCourses', async () => {
   const response = await axiosInstance.get('/courses/count');
   return response.data;
 });

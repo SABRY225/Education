@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import  { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './auth.css';
 import { useDispatch } from 'react-redux';
 import { signUpUser } from '../../Redux/actions/authActions';
@@ -15,7 +15,9 @@ function Teacher() {
     govenorate: '',
     accountType: 0
   });
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -34,10 +36,12 @@ function Teacher() {
       alert('Passwords do not match');
       return;
     }
-    const jsonData=JSON.stringify(formData)
-    await dispatch(signUpUser(jsonData));
-  };
+    // const jsonData=JSON.stringify(formData)
+    const res=await dispatch(signUpUser(formData));
+    console.log(res);
+    navigate('/signup/verifyRegister');
 
+  };
   return (
     <div className="Teacher-container">
       <div className="row text-center align-items-center card-register g-0">
@@ -48,6 +52,15 @@ function Teacher() {
           </div>
           <form onSubmit={handleSubmit}>
             <div>
+            <input
+                type="text"
+                name="firstName"
+                placeholder="First Name"
+                value={formData.firstName}
+                onChange={handleChange}
+                required
+                className='inputRegister'
+              />
               <input
                 type="text"
                 name="lastName"
@@ -57,17 +70,7 @@ function Teacher() {
                 required
                 className='inputRegister'
               />
-              <input
-                type="text"
-                name="firstName"
-                placeholder="First Name"
-                value={formData.firstName}
-                onChange={handleChange}
-                required
-                className='inputRegister'
-              />
             </div>
-
             <div>
               <input
                 type="tel"

@@ -1,8 +1,11 @@
-import React from 'react';
 import './Header.css';
 import person from '../../assets/person.png';
+import { useSelector } from 'react-redux';
 
 function Header() {
+  const { roles, token } = useSelector((state) => state.auth);
+  console.log(roles);
+  console.log(token);
   return (
     <div className="header">
       <div className="container">

@@ -64,7 +64,21 @@
     transform: translateY(1px);
     box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
 }
-
+.logout-link {
+    margin-left: 10px;
+    font-size: 16px;
+    color: #fff;
+    text-decoration: none;
+    padding: .5rem;
+    border: 1px solid #fff;
+    border-radius: 0.5rem;
+    background-color: #212F3D;
+  }
+  
+  .logout-link:hover {
+    background-color: #c82011;
+   
+  }
 @media (max-width: 768px) {
     .register {
         justify-content: center;

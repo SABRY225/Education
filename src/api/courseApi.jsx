@@ -3,10 +3,26 @@ import axiosInstance from "./axiosInstance";
 // Function to add a course
 export const addCourse = async (courseData) => {
   try {
-    const response = await axiosInstance.post('/courses', courseData);
+    console.log(courseData);
+    // Construct the URL with query parameters
+    const url = `/Course?Name=${courseData.Name}&MaterialName=${courseData.MaterialName}&Level=${courseData.Level}&Semester=${courseData.Semester}&Price=${courseData.price}`;
+    console.log(courseData.Token);
+
+    // Create a FormData object
+    const formData = new FormData();
+    formData.append('CourseImage', courseData.courseImage);
+
+    // Send the request
+    const response = await axiosInstance.post(url, formData, {
+      headers: {
+        Authorization: `Bearer ${courseData.Token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
     return response.data;
   } catch (error) {
-    console.error("Error adding course:", error);
+    console.log("Error adding course:", error);
     throw error;
   }
 };
@@ -45,9 +61,15 @@ export const enrollCourse = async (courseId, studentData) => {
 };
 
 // Function to get all courses
-export const getCourses = async () => {
+export const getCourses = async (token) => {
   try {
-    const response = await axiosInstance.get('/courses');
+    const response = await axiosInstance.get('Course/all',{
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error("Error fetching courses:", error);

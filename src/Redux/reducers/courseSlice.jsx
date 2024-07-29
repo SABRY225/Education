@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
-  addCourse,
-  editCourse,
-  deleteCourse,
-  enrollCourse,
-  getCourses,
-  getCourseById,
-  getCoursesByTeacher,
-  getNumOfStudentsInCourse,
-  getNumOfCourses,
+  Add_Course,
+  EditCourse,
+  DeleteCourse,
+  EnrollCourse,
+  GetCourses,
+  GetCourseById,
+  GetCoursesByTeacher,
+  GetNumOfStudentsInCourse,
+  GetNumOfCourses,
 } from '../actions/courseActions';
 
 // Initial state
@@ -30,113 +30,113 @@ const courseSlice = createSlice({
   extraReducers: (builder) => {
     builder
       // Add course
-      .addCase(addCourse.pending, (state) => {
+      .addCase(Add_Course.pending, (state) => {
         state.loading = true;
       })
-      .addCase(addCourse.fulfilled, (state, action) => {
+      .addCase(Add_Course.fulfilled, (state, action) => {
         state.loading = false;
         state.courses.push(action.payload);
       })
-      .addCase(addCourse.rejected, (state, action) => {
+      .addCase(Add_Course.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       })
       // Edit course
-      .addCase(editCourse.pending, (state) => {
+      .addCase(EditCourse.pending, (state) => {
         state.loading = true;
       })
-      .addCase(editCourse.fulfilled, (state, action) => {
+      .addCase(EditCourse.fulfilled, (state, action) => {
         state.loading = false;
         const index = state.courses.findIndex((course) => course.id === action.payload.id);
         if (index !== -1) {
           state.courses[index] = action.payload;
         }
       })
-      .addCase(editCourse.rejected, (state, action) => {
+      .addCase(EditCourse.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       })
       // Delete course
-      .addCase(deleteCourse.pending, (state) => {
+      .addCase(DeleteCourse.pending, (state) => {
         state.loading = true;
       })
-      .addCase(deleteCourse.fulfilled, (state, action) => {
+      .addCase(DeleteCourse.fulfilled, (state, action) => {
         state.loading = false;
         state.courses = state.courses.filter((course) => course.id !== action.payload);
       })
-      .addCase(deleteCourse.rejected, (state, action) => {
+      .addCase(DeleteCourse.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       })
       // Enroll course
-      .addCase(enrollCourse.pending, (state) => {
+      .addCase(EnrollCourse.pending, (state) => {
         state.loading = true;
       })
-      .addCase(enrollCourse.fulfilled, (state, action) => {
+      .addCase(EnrollCourse.fulfilled, (state) => {
         state.loading = false;
         // Handle enrollment response if needed
       })
-      .addCase(enrollCourse.rejected, (state, action) => {
+      .addCase(EnrollCourse.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       })
       // Get courses
-      .addCase(getCourses.pending, (state) => {
+      .addCase(GetCourses.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getCourses.fulfilled, (state, action) => {
+      .addCase(GetCourses.fulfilled, (state, action) => {
         state.loading = false;
         state.courses = action.payload;
       })
-      .addCase(getCourses.rejected, (state, action) => {
+      .addCase(GetCourses.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       })
       // Get course by ID
-      .addCase(getCourseById.pending, (state) => {
+      .addCase(GetCourseById.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getCourseById.fulfilled, (state, action) => {
+      .addCase(GetCourseById.fulfilled, (state, action) => {
         state.loading = false;
         state.course = action.payload;
       })
-      .addCase(getCourseById.rejected, (state, action) => {
+      .addCase(GetCourseById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       })
       // Get courses by teacher
-      .addCase(getCoursesByTeacher.pending, (state) => {
+      .addCase(GetCoursesByTeacher.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getCoursesByTeacher.fulfilled, (state, action) => {
+      .addCase(GetCoursesByTeacher.fulfilled, (state, action) => {
         state.loading = false;
         state.coursesByTeacher = action.payload;
       })
-      .addCase(getCoursesByTeacher.rejected, (state, action) => {
+      .addCase(GetCoursesByTeacher.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       })
       // Get number of students in course
-      .addCase(getNumOfStudentsInCourse.pending, (state) => {
+      .addCase(GetNumOfStudentsInCourse.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getNumOfStudentsInCourse.fulfilled, (state, action) => {
+      .addCase(GetNumOfStudentsInCourse.fulfilled, (state, action) => {
         state.loading = false;
         state.numOfStudentsInCourse = action.payload;
       })
-      .addCase(getNumOfStudentsInCourse.rejected, (state, action) => {
+      .addCase(GetNumOfStudentsInCourse.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       })
       // Get number of courses
-      .addCase(getNumOfCourses.pending, (state) => {
+      .addCase(GetNumOfCourses.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getNumOfCourses.fulfilled, (state, action) => {
+      .addCase(GetNumOfCourses.fulfilled, (state, action) => {
         state.loading = false;
         state.numOfCourses = action.payload;
       })
-      .addCase(getNumOfCourses.rejected, (state, action) => {
+      .addCase(GetNumOfCourses.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });

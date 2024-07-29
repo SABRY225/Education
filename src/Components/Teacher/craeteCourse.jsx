@@ -1,19 +1,31 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './EditCourse.css';
-import imgCourseNew from "../../assets/9829626.jpg";
+import { useDispatch, useSelector } from 'react-redux';
+import { Add_Course } from '../../Redux/actions/courseActions';
+// import imgCourseNew from "../../assets/9829626.jpg";
 
-function CraeteCourse() {
+function CreateCourse() {
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
+  console.log(token);
   const [selectedImage, setSelectedImage] = useState(null);
   const [formData, setFormData] = useState({
-    courseName: '',
-    level: '',
-    subject: '',
+    Name: '',
+    Level: '',
+    MaterialName: '',
     price: '',
+    Semester: '',
+    courseImage: '',
+    Token:token
   });
 
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       setSelectedImage(URL.createObjectURL(e.target.files[0]));
+      setFormData({
+        ...formData,
+        courseImage: e.target.files[0]
+      });
     }
   };
 
@@ -25,21 +37,24 @@ function CraeteCourse() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // You can add the form submission logic here, for example:
-    // Send the formData to your API or server
-    console.log('Form submitted:', formData);
-    // Reset the form
-    setFormData({
-      courseName: '',
-      level: ' ',
-      subject: ' ',
-      price: ''
-    });
-    setSelectedImage(null);
-    console.log('Form submitted:', formData);
-
+    try {
+      const res = await dispatch(Add_Course(formData));
+      console.log('Form submitted:', res);
+      // Reset the form
+      setFormData({
+        Name: '',
+        Level: '',
+        MaterialName: '',
+        price: '',
+        Semester: '',
+        courseImage: '',
+      });
+      setSelectedImage(null);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
   };
 
   return (
@@ -53,29 +68,29 @@ function CraeteCourse() {
                   <img src={selectedImage} alt="Selected" className="img-fluid rounded" />
                 </div>
               )}
-              <label htmlFor="imgCourse" className="form-label animated-input">تحميل صورة الكورس</label>
-              <input type="file" className="form-control animated-input" id="imgCourse" name="imgCourse" onChange={handleImageChange} />
+              <label htmlFor="courseImage" className="form-label animated-input">تحميل صورة الكورس</label>
+              <input type="file" className="form-control animated-input" id="courseImage" name="courseImage" onChange={handleImageChange} />
             </div>
           </div>
           <div className="col-md-8">
             <div className="mb-3">
-              <label htmlFor="courseName" className="form-label animated-input">اسم الكورس</label>
+              <label htmlFor="Name" className="form-label animated-input">اسم الكورس</label>
               <input
                 type="text"
                 className="form-control animated-input"
-                id="courseName"
-                name="courseName"
-                value={formData.courseName}
+                id="Name"
+                name="Name"
+                value={formData.Name}
                 onChange={handleInputChange}
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="level" className="form-label animated-input">المستوى الدراسي</label>
+              <label htmlFor="Level" className="form-label animated-input">المستوى الدراسي</label>
               <select
                 className="form-select animated-input"
-                id="level"
-                name="level"
-                value={formData.level}
+                id="Level"
+                name="Level"
+                value={formData.Level}
                 onChange={handleInputChange}
               >
                 <option value=""> الرجاء اختيار مستوي دراسي</option>
@@ -94,16 +109,29 @@ function CraeteCourse() {
               </select>
             </div>
             <div className="mb-3">
-              <label htmlFor="subject" className="form-label animated-input">المادة الدراسية</label>
+              <label htmlFor="Semester" className="form-label animated-input">الفصل الدراسي</label>
               <select
                 className="form-select animated-input"
-                id="subject"
-                name="subject"
-                value={formData.subject}
+                id="Semester"
+                name="Semester"
+                value={formData.Semester}
+                onChange={handleInputChange}
+              >
+                <option value=""> الرجاء اختيار الفصل دراسي</option>
+                <option value="الفصل الأول">الفصل الأول</option>
+                <option value="الفصل الثاني">الفصل الثاني</option>
+              </select>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="MaterialName" className="form-label animated-input">المادة الدراسية</label>
+              <select
+                className="form-select animated-input"
+                id="MaterialName"
+                name="MaterialName"
+                value={formData.MaterialName}
                 onChange={handleInputChange}
               >
                 <option value=""> الرجاء اختيار مادة دراسية</option>
-
                 <option value="اللغة العربية">اللغة العربية</option>
                 <option value="الرياضيات">الرياضيات</option>
                 <option value="العلوم">العلوم</option>
@@ -125,14 +153,13 @@ function CraeteCourse() {
           </div>
         </div>
         <div className="row justify-content-center mt-4">
-          <button type="submit" className="btn btn-primary animated-input" style={{
-            width:"250px"
-          }}>انشاء كورس</button>
+          <button type="submit" className="btn btn-primary animated-input" style={{ width: "250px" }}>
+            انشاء كورس
+          </button>
         </div>
       </form>
     </div>
   );
 }
 
-
-export default CraeteCourse
+export default CreateCourse;

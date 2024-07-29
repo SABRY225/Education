@@ -32,9 +32,9 @@ import {
     }
   });
   
-  export const refreshAuthToken = createAsyncThunk('auth/refresh-Token', async (refresh, { rejectWithValue }) => {
+  export const refreshAuthToken = createAsyncThunk('auth/refresh-Token', async (_, { rejectWithValue }) => {
     try {
-      const data = await refreshToken(refresh);
+      const data = await refreshToken();
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -55,8 +55,9 @@ import {
   
   export const verifyOtpCode = createAsyncThunk('auth/verifyOtp', async (otpData, { rejectWithValue }) => {
       try {
-          const data = await verifyOtp(otpData);
-          return data;
+          const response = await verifyOtp(otpData);
+          console.log(response);
+          return response; 
       } catch (error) {
           return rejectWithValue(error.response.data);
       }
@@ -71,9 +72,11 @@ import {
     }
   });
   
-  export const fetchCurrentUser = createAsyncThunk('auth/getCurrentUser', async (_, { rejectWithValue }) => {
+  export const fetchCurrentUser = createAsyncThunk('auth/user', async (token, { rejectWithValue }) => {
+    console.log(token);
     try {
-      const data = await getCurrentUser();
+      const data = await getCurrentUser(token);
+      console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -81,6 +84,7 @@ import {
   });
   
   export const updateUserInfo = createAsyncThunk('auth/editInfoUser', async (infoData, { rejectWithValue }) => {
+    console.log(infoData);
     try {
       const data = await editInfoUser(infoData);
       return data;

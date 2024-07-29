@@ -10,14 +10,23 @@ import {
   updateUserInfo,
   updatePassword,
   requestPasswordReset,
-  resetUserPassword
+  resetUserPassword,
 } from '../actions/authActions';
 
 const initialState = {
   user: null,
+  id: null,
+  firstName: null,
+  lastName: null,
+  email: null,
+  phoneNumber: null,
+  govenorate: null,
   token: null,
+  tokenExpiry: null, // Add tokenExpiry to manage token expiration
   loading: false,
+  roles: null,
   error: null,
+  isAuthenticated: false,
 };
 
 const authSlice = createSlice({
@@ -27,6 +36,18 @@ const authSlice = createSlice({
     logout(state) {
       state.user = null;
       state.token = null;
+      state.tokenExpiry = null;
+      state.roles = null;
+      state.isAuthenticated = false;
+    },
+    setTokenExpiry(state, action) {
+      state.tokenExpiry = action.payload;
+    },
+    setInfoProfile(state, action) {
+      state.firstName = action.payload.firstName;
+      state.lastName = action.payload.lastName;
+      state.phoneNumber = action.payload.phoneNumber;
+      state.govenorate = action.payload.govenorate;
     },
   },
   extraReducers: (builder) => {
@@ -37,8 +58,10 @@ const authSlice = createSlice({
       })
       .addCase(signInUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload.user;
         state.token = action.payload.token;
+        state.tokenExpiry = action.payload.refreshTokenExpiration; // Handle token expiry
+        state.roles = action.payload.roles;
+        state.isAuthenticated = action.payload.isAuthenticated;
       })
       .addCase(signInUser.rejected, (state, action) => {
         state.loading = false;
@@ -52,6 +75,9 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = null;
         state.token = null;
+        state.tokenExpiry = null; // Clear token expiry on sign out
+        state.roles = null;
+        state.isAuthenticated = false;
       })
       .addCase(signOutUser.rejected, (state, action) => {
         state.loading = false;
@@ -64,6 +90,7 @@ const authSlice = createSlice({
       .addCase(refreshAuthToken.fulfilled, (state, action) => {
         state.loading = false;
         state.token = action.payload.token;
+        state.tokenExpiry = action.payload.tokenExpiry; // Update token expiry
       })
       .addCase(refreshAuthToken.rejected, (state, action) => {
         state.loading = false;
@@ -73,10 +100,8 @@ const authSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(signUpUser.fulfilled, (state, action) => {
+      .addCase(signUpUser.fulfilled, (state) => {
         state.loading = false;
-        state.user = action.payload.user;
-        state.token = action.payload.token;
       })
       .addCase(signUpUser.rejected, (state, action) => {
         state.loading = false;
@@ -86,9 +111,11 @@ const authSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(verifyOtpCode.fulfilled, (state) => {
+      .addCase(verifyOtpCode.fulfilled, (state, action) => {
         state.loading = false;
-        // Handle successful OTP verification if needed
+        state.roles = action.payload.roles;
+        state.token = action.payload.token;
+        state.tokenExpiry = action.payload.tokenExpiry; // Handle token expiry
       })
       .addCase(verifyOtpCode.rejected, (state, action) => {
         state.loading = false;
@@ -113,6 +140,12 @@ const authSlice = createSlice({
       .addCase(fetchCurrentUser.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload.user;
+        state.id = action.payload.id;
+        state.firstName = action.payload.firstName;
+        state.lastName = action.payload.lastName;
+        state.email = action.payload.email;
+        state.phoneNumber = action.payload.phoneNumber;
+        state.govenorate = action.payload.govenorate;
       })
       .addCase(fetchCurrentUser.rejected, (state, action) => {
         state.loading = false;
@@ -169,6 +202,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { logout } = authSlice.actions;
+export const { logout, setTokenExpiry ,setInfoProfile} = authSlice.actions;
 
 export default authSlice.reducer;

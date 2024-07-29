@@ -9,7 +9,7 @@ export default function ProtectedRoutes({ children }) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [isRefreshing, setIsRefreshing] = useState(false);
-
+   console.log(isLoggedIn);
     useEffect(() => {
         const checkToken = async () => {
             if (!isLoggedIn) {

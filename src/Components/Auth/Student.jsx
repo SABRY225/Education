@@ -53,6 +53,15 @@ function Student() {
           </div>
           <form onSubmit={handleSubmit}>
             <div>
+            <input
+                type="text"
+                name="firstName"
+                placeholder="First Name"
+                value={formData.firstName}
+                onChange={handleChange}
+                className='inputRegister'
+                required
+              />
               <input
                 type="text"
                 name="lastName"
@@ -62,15 +71,7 @@ function Student() {
                 required
                 className='inputRegister'
               />
-              <input
-                type="text"
-                name="firstName"
-                placeholder="First Name"
-                value={formData.firstName}
-                onChange={handleChange}
-                className='inputRegister'
-                required
-              />
+
             </div>
 
             <div>

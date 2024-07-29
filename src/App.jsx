@@ -11,15 +11,16 @@ import { Provider } from 'react-redux';
 import {Signin,SignUp,Teacher,Student, VerifyRegister} from './Components/Auth/index';
 
 //Subjects
-import AllStuSubjexts from './student/StudentSubject/AllStuSubjexts';
-import ShowStuSubject from './student/StudentSubject/ShowStuSubject';
-import AllLessoins from './student/lessoins/AllLessoins';
-import Quize from './student/quizes/Quize';
-import ShowQuize from './student/quizes/ShowQuize';
-import Books from './student/books/Books';
- import AllSubjects from './student/AllSubject/AllSubject';
+import AllStuSubjexts from './Components/student/StudentSubject/AllStuSubjexts';
+import ShowStuSubject from './Components/student/StudentSubject/ShowStuSubject';
+import AllLessoins from './Components/student/lessoins/AllLessoins';
+import Quize from './Components/student/quizes/Quize';
+import ShowQuize from './Components/student/quizes/ShowQuize';
+import Books from './Components/student/books/Books';
+import AllSubjects from './Components/student/AllSubject/AllSubject';
 
 import { SignUpPage, StudentPage, TeacherPage } from './Pages/index';
+import {Dashboard,CraeteCourse, EditeCourse, Profile} from './Components/constant/path';
  
 const routers = createBrowserRouter([
   {
@@ -63,14 +64,17 @@ const routers = createBrowserRouter([
         path: "Student",
         element: <StudentPage />,
         children: [
-
+          { index:true, element: <AllStuSubjexts /> ,errorElement:(<ErrorPage />)},
         ],
       },
       {
         path: "Teacher",
         element: <TeacherPage />,
         children: [
-
+          { index:true, element: <Dashboard/> ,errorElement:(<ErrorPage />)},
+          { path:'addCourse', element: <CraeteCourse/> ,errorElement:(<ErrorPage />)},
+          { path:'editCourse', element: <EditeCourse/> ,errorElement:(<ErrorPage />)},
+          { path:'profile', element: <Profile /> ,errorElement:(<ErrorPage />)},
         ],
       },
       {
