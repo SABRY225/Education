@@ -1,16 +1,32 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import LectureCard from './LectureCard';
-import data from '../data/courses';
 import { Modal, Button } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 import './Style.css';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 function Lecture() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [courses, setCourses] = useState(data);
+  const [Lectures, setLectures] = useState([]);
   const { courseId } = useParams();
   const [selectedCourse, setSelectedCourse] = useState(null);
+  const token = useSelector((state) => state.auth.token);
+  
+  useEffect(() => {
+    const fetchFun= async()=>{
+       const res=await axios.get(`http://lms.tryasp.net/Lecture/all-in-course?courseId=${courseId}`,{
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+       });
+       console.log(res.data);
+       setLectures(res.data);
+    }
+    fetchFun();
 
+  }, [token,courseId]);
   const handleEdit = (course) => {
     console.log(course.id);
   };
@@ -24,10 +40,17 @@ function Lecture() {
     setShowDeleteModal(false);
     setSelectedCourse(null);
   };
-
-  const handleDelete = () => {
-    setCourses(courses.filter(course => course.id !== selectedCourse.id));
+  const handleDelete = async() => {
+    setLectures(Lectures.filter(course => course.id !== selectedCourse.id));
     handleCloseDeleteModal();
+    const res=await axios.delete(`http://lms.tryasp.net/Lecture?id=${selectedCourse.id}`,{
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data',
+      },
+     });
+     console.log(res.data);
+    
   };
 
   return (
@@ -39,10 +62,11 @@ function Lecture() {
       </div>
       <div className='text-center bg-light rounded shadow p-5 m-4'>
         <div className="row text-center">
-          {courses.map((course, index) => (
+          {Lectures.map((course, index) => (
             <div className="col-md-12 col-sm-12" key={index}>
               <LectureCard
                 LectureName={course.name}
+                lectureId={course.id}
                 onEdit={() => handleEdit(course)}
                 onDelete={() => handleShowDeleteModal(course)}
               />

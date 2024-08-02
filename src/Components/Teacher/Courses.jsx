@@ -1,17 +1,35 @@
 // CourseCard.js
 import './CourseCard.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const CourseCard = ({ imgSrc, courseName, courseId, onEdit, onDelete }) => {
+  const navigate = useNavigate();
+
+    const handeledite=()=>{
+        navigate(`./${courseId}/editCourse`)
+    }
+    const handelView=()=>{
+        navigate(`./${courseId}`)
+    }
     return (
-        <div className="course-card">
-            <img src={`http://lms.tryasp.net${imgSrc}`} alt={courseName} className="course-image" />
-            <Link to={`./${courseId}`}><h3 className="course-name">{courseName}</h3></Link>
-            <div className="course-actions">
-                <Link to={`./${courseId}/editCourse`} onClick={onEdit} className="edit-button">تعديل</Link>
-                <button onClick={onDelete} className="delete-button">حذف</button>
+        <>
+            <div className="course-image">
+                <img src={`http://lms.tryasp.net${imgSrc}`} alt={courseName} />
             </div>
-        </div>
+            <h3 className="course-name">{courseName}</h3>
+            <div className="course-actions">
+                <div className="view-button" onClick={handelView} >
+                    <div >عرض الكروس</div>
+                </div>
+                <div className="edit-button" onClick={handeledite} >
+                    <div >تعديل</div>
+                </div>
+                <div className="delete-button">
+                    <div onClick={onDelete} >حذف</div>
+                </div>
+            </div>
+
+        </>
     );
 };
 

@@ -4,49 +4,65 @@
     border-radius: 8px;
     width: 300px;
     margin: 16px;
-    /* padding: 16px; */
+    padding: 16px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     color: rgb(9, 7, 7);
+    height: auto;
+    width: 20vw;
 
 }
   .course-image {
-    width: 100%;
-    height: auto;
+    text-align: center;
+    width: 18vw;
+    height: 20vh;
     border-radius: 8px;
+    background: #212F3D;
   }
-  
+  .course-image  img{
+    width: 100%;
+    height: 100%;
+  }
   .course-name {
     font-size: 1.5em;
     margin: 16px 0;
   }
-  
-  .course-actions {
-    display: flex;
-    justify-content: space-around;
-  }
-  
-  .edit-button, .delete-button ,.add-button{
-    padding: 9px 46px;
+
+  .edit-button,.view-button, .delete-button ,.add-button{
     margin: 1.5rem 0.5rem;
     border: none;
+    padding: 0.5rem;
     border-radius: 4px;
     cursor: pointer;
     font-size: 1em;
-    text-decoration: none;
   }
   .add-button {
     background-color: #212F3D;
     color: white;
   }
-  .edit-button {
-    background-color: #4CAF50;
-    color: white;
+  .view-button,.edit-button, .delete-button {
+    border: 1px solid rgb(17, 10, 10);
   }
-  
-  .delete-button {
-    background-color: #f44336;
-    color: white;
+  .view-button:hover{
+    border: 2px solid rgb(0, 170, 255);
+    color: rgb(0, 170, 255);
+
+  }
+  .view-button a,.edit-button a,.delete-button div{
+    color: rgb(17, 10, 10);
+    text-decoration: none;
+
+  }
+
+  .edit-button {
+    border: 2px solid rgb(17, 10, 10);
+  }
+  .edit-button:hover {
+    border: 2px solid #4CAF50;
+  }
+
+  .delete-button:hover {
+    border: 2px solid #f44336;
   }
   
   .edit-button:hover, .delete-button:hover ,.edit-button:hover {

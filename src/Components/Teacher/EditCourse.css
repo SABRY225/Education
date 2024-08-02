@@ -39,7 +39,7 @@ input[type="file"] {
     margin-top: 0.5rem;
 }
 
-button[type="submit"] {
+.btn[type="submit"] {
     padding: 0.75rem 1.5rem;
     font-size: 1.1rem;
 }

@@ -39,7 +39,7 @@ function AddLectures() {
           'Content-Type': 'multipart/form-data',
         },
       });
-
+     
       if (res.status === 200) {
         alert(res.data);
       }

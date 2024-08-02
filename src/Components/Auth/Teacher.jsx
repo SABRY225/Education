@@ -131,7 +131,7 @@ function Teacher() {
               required
               className='inputRegister'
             />
-            <button type="submit">Register</button>
+            <button className='btn' type="submit">Register</button>
           </form>
           <p>
             Already have an account? <Link to="/signin">Login</Link>

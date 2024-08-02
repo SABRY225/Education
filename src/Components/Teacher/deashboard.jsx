@@ -75,9 +75,9 @@ function Dashboard() {
           أضافة كورس
         </Link>
       </div>
-      <div className="row text-center">
+      <div className="row justify-content-center">
         {Courses.map((course, index) => (
-          <div className="col-md-4" key={index}>
+          <div className="col-sm-12 col-md-4 course-card" key={index}>
             <CourseCard
               imgSrc={course.image}
               courseId={course.id}

@@ -45,11 +45,11 @@ function VerifyRegister() {
               />
             </div>
             {loading ? (
-              <button type="submit" disabled>
+              <button className='btn' type="submit" disabled>
                 Verifying...
               </button>
             ) : (
-              <button type="submit">Verify</button>
+              <button className='btn' type="submit">Verify</button>
             )}
           </form>
           {error && <div className="error">{error}</div>}

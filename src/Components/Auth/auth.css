@@ -178,7 +178,7 @@
   border-radius: 5px;
 }
 
-button {
+.btn {
   /* width: 100%; */
   padding: 10px;
   /* background-color: #007bff; */
@@ -189,7 +189,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.btn:hover {
   background-color: #0056b3;
 }
 
@@ -208,7 +208,7 @@ button:hover {
     font-size: 28px;
   }
 
-  button {
+  .btn  {
     font-size: 14px;
   }
 }
@@ -256,7 +256,7 @@ form {
   font-size: 1rem;
 }
 
-button[type="submit"] {
+.btn [type="submit"] {
   width: 100%;
   padding: 10px;
   margin-top: 10px;
@@ -268,7 +268,7 @@ button[type="submit"] {
   font-size: 1rem;
 }
 
-button[type="submit"]:hover {
+.btn [type="submit"]:hover {
   background-color: #2c3e50; /* Darker shade of primary color */
 }
 

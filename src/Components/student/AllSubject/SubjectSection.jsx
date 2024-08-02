@@ -22,7 +22,7 @@ const SubjectSection = ({ materialName, courses }) => {
                     {courses.map((course) => (
                         <>
                         <div key={course.id} className="CardCourseSection" >
-                            <img src={course.image} alt={`Image of ${course.name}`} />
+                            <img src={`http://lms.tryasp.net${course.image}`} alt={`Image of ${course.name}`} />
                             <h3>{course.name}</h3>
                             <div className="teacher-info">
                                 <p>{course.teacher.firstName} {course.teacher.lastName}</p>

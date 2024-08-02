@@ -14,7 +14,7 @@ const AllSubjects = () => {
   useEffect(() => {
     const fetchSubjects = async () => {
       try {
-        const res = await axios.get('http://localhost:5177/Course/all', {
+        const res = await axios.get('http://lms.tryasp.net/Course/all', {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
@@ -38,7 +38,7 @@ const AllSubjects = () => {
     acc[materialName].push(course);
     return acc;
   }, {});
-
+console.log(groupedData);
   const filteredSubjects = subjects.filter((subject) => {
     if (typeof subject.name !== 'string' || typeof subject.teacher !== 'string') {
       console.error("Invalid data format:", subject);
@@ -50,7 +50,7 @@ const AllSubjects = () => {
   });
   
   
-
+console.log(search);
   return (
     <div className="row rtl fw-normal justify-content-center" style={{ height: "100%" }}>
       <div className="col-md-7">
