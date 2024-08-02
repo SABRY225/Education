@@ -1,8 +1,7 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './auth.css';
-import { useDispatch } from 'react-redux';
-import { signUpUser } from '../../Redux/actions/authActions';
+import axios from 'axios';
 
 function Teacher() {
   const [formData, setFormData] = useState({
@@ -11,12 +10,11 @@ function Teacher() {
     phoneNumber: '',
     email: '',
     password: '',
-    confirmPassword:'',
+    confirmPassword: '',
     govenorate: '',
     accountType: 0
   });
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,8 +24,7 @@ function Teacher() {
     });
   };
 
-
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
 
@@ -36,12 +33,27 @@ function Teacher() {
       alert('Passwords do not match');
       return;
     }
-    // const jsonData=JSON.stringify(formData)
-    const res=await dispatch(signUpUser(formData));
-    console.log(res);
-    navigate('/signup/verifyRegister');
 
+    try {
+      const res = await axios.post('http://localhost:5177/Account/register', formData, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      console.log(res);
+
+      // If the response is successful, navigate to the verifyRegister page
+      if (res.status === 200 || res.status === 201) {
+        navigate('/signup/verifyRegister');
+      } else {
+        alert('Registration failed');
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error.message);
+      alert('Registration failed. Please try again.');
+    }
   };
+
   return (
     <div className="Teacher-container">
       <div className="row text-center align-items-center card-register g-0">
@@ -52,7 +64,7 @@ function Teacher() {
           </div>
           <form onSubmit={handleSubmit}>
             <div>
-            <input
+              <input
                 type="text"
                 name="firstName"
                 placeholder="First Name"
@@ -99,7 +111,7 @@ function Teacher() {
               onChange={handleChange}
               required
               className='inputRegister'
-              />
+            />
             <input
               type="password"
               name="confirmPassword"
@@ -117,16 +129,13 @@ function Teacher() {
               onChange={handleChange}
               required
               className='inputRegister'
-              />
+            />
             <button type="submit">Register</button>
           </form>
           <p>
             Already have an account? <Link to="/signin">Login</Link>
           </p>
         </div>
-        {/* <div className="col-md-6">
-          <img src={photoLogin} alt="" className="photoLogin" />
-        </div> */}
       </div>
     </div>
   );

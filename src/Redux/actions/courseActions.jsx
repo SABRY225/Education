@@ -3,7 +3,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axiosInstance from '../../api/axiosInstance'; // Adjust the path as needed
 import {
   addCourse,
-  getCourses
+  getCourses,
+  getNumOfStudentsInCourse
 } from '../../api/courseApi'; // Adjust the import path as needed
 
 export const Add_Course = createAsyncThunk('Course/', async (courseData) => {
@@ -48,7 +49,7 @@ export const GetNumOfStudentsInCourse = createAsyncThunk('courses/getNumOfStuden
   return response.data;
 });
 
-export const GetNumOfCourses = createAsyncThunk('courses/getNumOfCourses', async () => {
-  const response = await axiosInstance.get('/courses/count');
+export const GetNumOfCourses = createAsyncThunk('Course/count', async (token) => {
+  const response = await getNumOfStudentsInCourse(token);
   return response.data;
 });

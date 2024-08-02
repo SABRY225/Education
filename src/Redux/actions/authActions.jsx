@@ -63,8 +63,9 @@ import {
       }
   });
   
-  export const sendOtpEmail = createAsyncThunk('auth/sendOtp', async (emailUser, { rejectWithValue }) => {
+  export const sendOtpEmail = createAsyncThunk('Account/send-otp', async (emailUser, { rejectWithValue }) => {
     try {
+      console.log(emailUser);
       const data = await sendOtp(emailUser);
       return data;
     } catch (error) {

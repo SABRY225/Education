@@ -28,6 +28,7 @@ function Signin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await dispatch(signInUser({ email, password }));
+    console.log(email, password);
     console.log('res : ', res.payload.token);
     const res2 = await dispatch(fetchCurrentUser(res.payload.token));
     if (signInUser.fulfilled.match(res)) {
@@ -73,7 +74,7 @@ function Signin() {
               />
             </div>
             <div className="col-md-12 form-group">
-              <Link to="/forgot-password">Forgot Password?</Link>
+              <Link to="/sendEmail">Forgot Password?</Link>
             </div>
             <div className="col-md-12 form-group">
               <input

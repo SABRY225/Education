@@ -38,6 +38,14 @@ function Profile() {
                                 onChange={(e) => setFirstName(e.target.value)} 
                             />
                         </div>
+                                                <div>
+                            <label>First Name:</label>
+                            <input 
+                                type="text" 
+                                value={firstName} 
+                                onChange={(e) => setFirstName(e.target.value)} 
+                            />
+                        </div>
                         <div>
                             <label>Last Name:</label>
                             <input 

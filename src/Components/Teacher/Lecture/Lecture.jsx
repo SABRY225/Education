@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import LectureCard from './LectureCard';
 import data from '../data/courses';
 import { Modal, Button } from 'react-bootstrap';

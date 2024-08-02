@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axiosInstance from '../../api/axiosInstance';
+import { getNumOfTeachers } from '../../api/teacherApi';
 
 // Action for adding an image for a teacher
 export const addImgTeacher = createAsyncThunk(
@@ -28,14 +29,8 @@ export const deleteImgTeacher = createAsyncThunk(
 );
 
 // Action for getting the number of teachers
-export const getNumOfTeachers = createAsyncThunk(
-  'teachers/getNumOfTeachers',
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await axiosInstance.get('/teachers/count');
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
+export const getNumTeachers = createAsyncThunk('Teacher/count', async (token) => {
+  const response = await getNumOfTeachers(token);
+  return response.data;
+});
+

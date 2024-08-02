@@ -1,9 +1,14 @@
 import axiosInstance from "./axiosInstance";
 
 // Function to get the number of students
-export const getNumOfStudents = async () => {
+export const getNumOfStudents = async (token) => {
   try {
-    const response = await axiosInstance.get('/students/count');
+    const response = await axiosInstance.get('/Student/count', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
     return response.data;
   } catch (error) {
     console.error("Error fetching number of students:", error);

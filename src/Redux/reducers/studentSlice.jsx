@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getNumOfStudents } from '../actions/studentActions';
+import { getNumStudents } from '../actions/studentActions';
 
 // Initial state
 const initialState = {
@@ -16,14 +16,14 @@ const studentSlice = createSlice({
   extraReducers: (builder) => {
     builder
       // Get number of students
-      .addCase(getNumOfStudents.pending, (state) => {
+      .addCase(getNumStudents.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getNumOfStudents.fulfilled, (state, action) => {
+      .addCase(getNumStudents.fulfilled, (state, action) => {
         state.loading = false;
         state.numOfStudents = action.payload;
       })
-      .addCase(getNumOfStudents.rejected, (state, action) => {
+      .addCase(getNumStudents.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

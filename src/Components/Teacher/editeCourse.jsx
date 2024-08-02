@@ -1,19 +1,52 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './EditCourse.css';
-import imgCourseNew from "../../assets/9829626.jpg";
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+
 
 function EditCourse() {
-  const [selectedImage, setSelectedImage] = useState(imgCourseNew);
+  const token = useSelector((state) => state.auth.token);
+  const { courseId } = useParams();
+
+  const [selectedImage, setSelectedImage] = useState(null);
   const [formData, setFormData] = useState({
-    courseName: 'تفاضل وتكامل',
-    level: 'الأول الابتدائي',
-    subject: 'اللغة العربية',
-    price: '30',
+    Name: '',
+    Level: '',
+    MaterialName: '',
+    Price: '',
+    Semester: '',
+    courseImage: '',
+    Id:''
   });
+  useEffect(()=>{
+    const fatechCourse=async()=>{
+      const response = await axios.get(`http://localhost:5177/Course/by-id?id=${courseId}`, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data',
+        }
+    });
+    setFormData({
+      Name: response.data.name,
+    Level: response.data.level,
+    MaterialName: response.data.materialName,
+    Price: response.data.price,
+    Semester: response.data.semester,
+    courseImage: response.data.image,
+    Id:response.data.id
+    });
+    }
+    fatechCourse();
+  },[courseId])
 
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       setSelectedImage(URL.createObjectURL(e.target.files[0]));
+      setFormData({
+        ...formData,
+        courseImage: e.target.files[0]
+      });
     }
   };
 
@@ -25,23 +58,45 @@ function EditCourse() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // You can add the form submission logic here, for example:
-    // Send the formData to your API or server
-    console.log('Form submitted:', formData);
-    // Reset the form
-    setFormData({
-      courseName: '',
-      level: 'الأول الابتدائي',
-      subject: 'اللغة العربية',
-      price: ''
-    });
-    setSelectedImage(null);
+    try {
+      const imageFile = formData.courseImage;
+  
+      // Prepare form data
+      const formDataToSend = new FormData();
+      formDataToSend.append('CourseImage', imageFile);
+      Object.keys(formData).forEach(key => {
+        if (key !== 'courseImage') {
+          formDataToSend.append(key, formData[key]);
+        }
+      });
+      Object.keys(formData).forEach(key => {
+          console.log(key, formData[key]);
+      });
+      // Send the data to the backend
+      const res = await axios.put('http://localhost:5177/Course', formDataToSend, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      console.log(res);
+      if (res.status ==200) {
+        alert(res.data)
+  
+      }else{
+        alert("حاول تاني ")
+      }
+      
+    } catch (error) {
+      console.log("Error submitting form:", error.message);
+    }
   };
 
   return (
-    <div className="container my-5 bgCourse" >
+    <div className="container my-5">
       <form className="text-center bg-light p-4 rounded shadow" onSubmit={handleSubmit}>
         <div className="row justify-content-center align-items-center g-3">
           <div className="col-md-4">
@@ -51,31 +106,33 @@ function EditCourse() {
                   <img src={selectedImage} alt="Selected" className="img-fluid rounded" />
                 </div>
               )}
-              <label htmlFor="imgCourse" className="form-label">تحميل صورة الكورس</label>
-              <input type="file" className="form-control animated-input" id="imgCourse" name="imgCourse" onChange={handleImageChange} />
+              <label htmlFor="courseImage" className="form-label animated-input">تحميل صورة الكورس</label>
+              <input type="file" className="form-control animated-input" id="courseImage" name="courseImage" onChange={handleImageChange} />
             </div>
           </div>
           <div className="col-md-8">
             <div className="mb-3">
-              <label htmlFor="courseName" className="form-label">اسم الكورس</label>
+              <label htmlFor="Name" className="form-label animated-input">اسم الكورس</label>
               <input
                 type="text"
                 className="form-control animated-input"
-                id="courseName"
-                name="courseName"
-                value={formData.courseName}
+                id="Name"
+                name="Name"
+                placeholder='اسم الكورس'
+                value={formData.Name}
                 onChange={handleInputChange}
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="level" className="form-label">المستوى الدراسي</label>
+              <label htmlFor="Level" className="form-label animated-input">المستوى الدراسي</label>
               <select
                 className="form-select animated-input"
-                id="level"
-                name="level"
-                value={formData.level}
+                id="Level"
+                name="Level"
+                value={formData.Level}
                 onChange={handleInputChange}
               >
+                <option value=""> الرجاء اختيار مستوي دراسي</option>
                 <option value="الأول الابتدائي">الأول الابتدائي</option>
                 <option value="الثاني الابتدائي">الثاني الابتدائي</option>
                 <option value="الثالث الابتدائي">الثالث الابتدائي</option>
@@ -91,14 +148,29 @@ function EditCourse() {
               </select>
             </div>
             <div className="mb-3">
-              <label htmlFor="subject" className="form-label">المادة الدراسية</label>
+              <label htmlFor="Semester" className="form-label animated-input">الفصل الدراسي</label>
               <select
                 className="form-select animated-input"
-                id="subject"
-                name="subject"
-                value={formData.subject}
+                id="Semester"
+                name="Semester"
+                value={formData.Semester}
                 onChange={handleInputChange}
               >
+                <option value=""> الرجاء اختيار الفصل دراسي</option>
+                <option value="الفصل الأول">الفصل الأول</option>
+                <option value="الفصل الثاني">الفصل الثاني</option>
+              </select>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="MaterialName" className="form-label animated-input">المادة الدراسية</label>
+              <select
+                className="form-select animated-input"
+                id="MaterialName"
+                name="MaterialName"
+                value={formData.MaterialName}
+                onChange={handleInputChange}
+              >
+                <option value=""> الرجاء اختيار مادة دراسية</option>
                 <option value="اللغة العربية">اللغة العربية</option>
                 <option value="الرياضيات">الرياضيات</option>
                 <option value="العلوم">العلوم</option>
@@ -107,26 +179,28 @@ function EditCourse() {
               </select>
             </div>
             <div className="mb-3">
-              <label htmlFor="price" className="form-label">سعر الكورس</label>
+              <label htmlFor="Price" className="form-label animated-input">سعر الكورس</label>
               <input
                 type="number"
                 className="form-control animated-input"
-                id="price"
-                name="price"
-                value={formData.price}
+                id="Price"
+                name="Price"
+                placeholder='سعر الكورس'
+                value={formData.Price}
                 onChange={handleInputChange}
               />
             </div>
           </div>
         </div>
         <div className="row justify-content-center mt-4">
-          <button type="submit" className="btn btn-primary" style={{
-            width:"250px"
-          }}>تعديل الكورس</button>
+          <button type="submit" className="btn btn-primary animated-input" style={{ width: "250px" }}>
+            تعديل كورس
+          </button>
         </div>
       </form>
     </div>
   );
 }
+
 
 export default EditCourse;

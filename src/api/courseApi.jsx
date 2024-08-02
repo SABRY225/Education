@@ -111,9 +111,14 @@ export const getNumOfStudentsInCourse = async (courseId) => {
 };
 
 // Function to get the number of courses
-export const getNumOfCourses = async () => {
+export const getNumOfCourses = async (token) => {
   try {
-    const response = await axiosInstance.get('/courses/count');
+    const response = await axiosInstance.get('/Course/count', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
     return response.data;
   } catch (error) {
     console.error("Error fetching number of courses:", error);

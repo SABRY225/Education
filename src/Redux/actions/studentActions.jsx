@@ -1,15 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axiosInstance from '../../api/axiosInstance';
+import { getNumOfStudents } from '../../api/studentApi';
 
 // Action for getting the number of students
-export const getNumOfStudents = createAsyncThunk(
-  'students/getNumOfStudents',
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await axiosInstance.get('/students/count');
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
+
+export const getNumStudents = createAsyncThunk('Student/count', async (token) => {
+  const response = await getNumOfStudents(token);
+  return response.data;
+});
+

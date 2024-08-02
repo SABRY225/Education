@@ -1,22 +1,18 @@
 import { useState } from 'react';
 import './EditCourse.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { Add_Course } from '../../Redux/actions/courseActions';
-// import imgCourseNew from "../../assets/9829626.jpg";
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 function CreateCourse() {
-  const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
-  console.log(token);
   const [selectedImage, setSelectedImage] = useState(null);
   const [formData, setFormData] = useState({
     Name: '',
     Level: '',
     MaterialName: '',
-    price: '',
+    Price: '',
     Semester: '',
     courseImage: '',
-    Token:token
   });
 
   const handleImageChange = (e) => {
@@ -44,40 +40,38 @@ function CreateCourse() {
   
       // Prepare form data
       const formDataToSend = new FormData();
-      formDataToSend.append('courseImage', imageFile);
+      formDataToSend.append('CourseImage', imageFile);
       Object.keys(formData).forEach(key => {
         if (key !== 'courseImage') {
           formDataToSend.append(key, formData[key]);
         }
       });
-  
+
       // Send the data to the backend
-      const res = await fetch('http://localhost:5177/Course', {
-        method: 'POST',
+      const res = await axios.post('http://localhost:5177/Course', formDataToSend, {
         headers: {
           'Authorization': `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
         },
-        body: formDataToSend,
       });
-  
-      if (!res.ok) {
-        const errorResponse = await res.json();
-        throw new Error(`Error: ${errorResponse.title} - ${JSON.stringify(errorResponse.errors)}`);
-      }
-  
-      const result = await res.json();
-      console.log('Form submitted:', result);
-  
+
+      console.log(res);
+      if (res.status ==200) {
+        alert(res.data)
       // Reset the form
       setFormData({
         Name: '',
         Level: '',
         MaterialName: '',
-        price: '',
+        Price: '',
         Semester: '',
         courseImage: '',
       });
       setSelectedImage(null);
+      }else{
+        alert("حاول تاني ")
+      }
+      
     } catch (error) {
       console.error("Error submitting form:", error.message);
     }
@@ -106,6 +100,7 @@ function CreateCourse() {
                 className="form-control animated-input"
                 id="Name"
                 name="Name"
+                placeholder='اسم الكورس'
                 value={formData.Name}
                 onChange={handleInputChange}
               />
@@ -166,13 +161,14 @@ function CreateCourse() {
               </select>
             </div>
             <div className="mb-3">
-              <label htmlFor="price" className="form-label animated-input">سعر الكورس</label>
+              <label htmlFor="Price" className="form-label animated-input">سعر الكورس</label>
               <input
                 type="number"
                 className="form-control animated-input"
-                id="price"
-                name="price"
-                value={formData.price}
+                id="Price"
+                name="Price"
+                placeholder='سعر الكورس'
+                value={formData.Price}
                 onChange={handleInputChange}
               />
             </div>

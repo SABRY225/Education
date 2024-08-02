@@ -57,7 +57,10 @@ export const verifyOtp = async (otpData) => {
 // Send OTP to user email
 export const sendOtp = async (emailUser) => {
   try {
+    
+    
     const response = await axiosInstance.post("Account/send-otp", { email: emailUser });
+    console.log(response);
     return response.data;
   } catch (error) {
     return handleError(error);

@@ -20,7 +20,7 @@ import Books from './Components/student/books/Books';
 import AllSubjects from './Components/student/AllSubject/AllSubject';
 
 import { SignUpPage, StudentPage, TeacherPage } from './Pages/index';
-import {Dashboard,CraeteCourse, EditeCourse, Profile} from './Components/constant/path';
+import {Dashboard,CraeteCourse, EditeCourse, Profile, SendEmail, ForgetPassword, Course, Lecture, Book, Exam} from './Components/constant/path';
  
 const routers = createBrowserRouter([
   {
@@ -31,6 +31,8 @@ const routers = createBrowserRouter([
     children: [
       {index:true,element: <Landing /> ,errorElement:(<ErrorPage />)},
       { path: "signin", element: <Signin /> ,errorElement:(<ErrorPage />)},
+      { path: "sendEmail", element: <SendEmail /> ,errorElement:(<ErrorPage />)},
+      { path: "forget-Password", element: <ForgetPassword /> ,errorElement:(<ErrorPage />)},
       { path: "signup", element: <SignUpPage /> ,errorElement:(<ErrorPage />),
         children:[
           { index:true, element: <SignUp /> ,errorElement:(<ErrorPage />)},
@@ -73,7 +75,11 @@ const routers = createBrowserRouter([
         children: [
           { index:true, element: <Dashboard/> ,errorElement:(<ErrorPage />)},
           { path:'addCourse', element: <CraeteCourse/> ,errorElement:(<ErrorPage />)},
-          { path:'editCourse', element: <EditeCourse/> ,errorElement:(<ErrorPage />)},
+          { path:':courseId/Lectures', element: <Lecture/> ,errorElement:(<ErrorPage />)},
+          { path:':courseId/Books', element: <Book/> ,errorElement:(<ErrorPage />)},
+          { path:':courseId/Exams', element: <Exam/> ,errorElement:(<ErrorPage />)},
+          { path:':courseId/editCourse', element: <EditeCourse/> ,errorElement:(<ErrorPage />)},
+          { path:':courseId', element: <Course/> ,errorElement:(<ErrorPage />)},
           { path:'profile', element: <Profile /> ,errorElement:(<ErrorPage />)},
         ],
       },
@@ -83,6 +89,7 @@ const routers = createBrowserRouter([
         children: [
           {index:true,element: <Landing /> ,errorElement:(<ErrorPage />)},
           { path: "signin", element: <Signin /> ,errorElement:(<ErrorPage />)},
+          { path: "sendEmail", element: <SendEmail /> ,errorElement:(<ErrorPage />)},
           { path: "signup", element: <SignUpPage /> ,errorElement:(<ErrorPage />),
             children:[
               { index:true, element: <SignUp /> ,errorElement:(<ErrorPage />)},

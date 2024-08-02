@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addImgTeacher, deleteImgTeacher, getNumOfTeachers } from '../actions/teacherActions';
+import { addImgTeacher, deleteImgTeacher, getNumTeachers } from '../actions/teacherActions';
 
 // Initial state
 const initialState = {
@@ -41,14 +41,14 @@ const teacherSlice = createSlice({
         state.error = action.payload;
       })
       // Get number of teachers
-      .addCase(getNumOfTeachers.pending, (state) => {
+      .addCase(getNumTeachers.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getNumOfTeachers.fulfilled, (state, action) => {
+      .addCase(getNumTeachers.fulfilled, (state, action) => {
         state.loading = false;
         state.numOfTeachers = action.payload;
       })
-      .addCase(getNumOfTeachers.rejected, (state, action) => {
+      .addCase(getNumTeachers.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

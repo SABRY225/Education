@@ -17,6 +17,7 @@
     font-weight: bold;
     display: flex;
     align-items: center;
+    text-decoration: none;
 }
 
 .logo i {
@@ -78,6 +79,16 @@
   .logout-link:hover {
     background-color: #c82011;
    
+  }
+  .DashboardLink{
+    color: #fff;
+    font-style: inherit;
+    font-size: 20px;
+    text-decoration: none;
+  }
+  .DashboardLink:hover{
+    text-decoration: underline;
+    color: #007bff;
   }
 @media (max-width: 768px) {
     .register {
