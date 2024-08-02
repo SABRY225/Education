@@ -35,7 +35,7 @@ function Teacher() {
     }
 
     try {
-      const res = await axios.post('http://localhost:5177/Account/register', formData, {
+      const res = await axios.post('http://lms.tryasp.net/Account/register', formData, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -44,6 +44,7 @@ function Teacher() {
 
       // If the response is successful, navigate to the verifyRegister page
       if (res.status === 200 || res.status === 201) {
+       localStorage.setItem('email',formData.email);
         navigate('/signup/verifyRegister');
       } else {
         alert('Registration failed');

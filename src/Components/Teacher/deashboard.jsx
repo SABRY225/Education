@@ -3,21 +3,32 @@ import CourseCard from './Courses';
 import data from "./data/courses";
 import { Modal, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { GetCourses } from '../../Redux/actions/courseActions';
+import {useSelector } from 'react-redux';
 import axios from 'axios';
 
 function Dashboard() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [Courses, setCourses] = useState(data);
   const [selectedCourse, setSelectedCourse] = useState(null);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
-  const coursesFromStore = useSelector((state) => state.course.courses);
+  const teacherId = useSelector((state) => state.auth.id);
+  const coursesFromStore = useSelector((state) => state.course.coursesByTeacher);
 
   useEffect(() => {
-    dispatch(GetCourses(token));
-  }, [dispatch, token]);
+    const fetchFun= async()=>{
+       const res=await axios.get(`http://lms.tryasp.net/Course/teacher-courses?teacherId=${teacherId}`,{
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+       });
+       console.log(res.data);
+       setCourses(res.data);
+    }
+    fetchFun();
+
+  }, [token,teacherId]);
 
   useEffect(() => {
     setCourses(coursesFromStore);
@@ -43,7 +54,7 @@ function Dashboard() {
     setCourses((prevCourses) => prevCourses.filter(course => course.id !== selectedCourse.id));
     const fetchCourseData = async () => {
       try {
-        await axios.delete(`http://localhost:5177/Course?id=${selectedCourse.id}`, {
+        await axios.delete(`http://lms.tryasp.net/Course?id=${selectedCourse.id}`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },

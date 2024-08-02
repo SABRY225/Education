@@ -8,3 +8,6 @@ export {default as Course} from "../Teacher/Course";
 export {default as Lecture} from "../Teacher/Lecture/Lecture";
 export {default as Exam} from "../Teacher/Exam/Exam";
 export {default as Book} from "../Teacher/Book/Book";
+export {default as EditeLectures} from "../Teacher/Lecture/EditeLectures";
+export {default as ViewLectures} from "../Teacher/Lecture/ViewLectures";
+export {default as AddLectures} from "../Teacher/Lecture/AddLectures";

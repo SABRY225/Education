@@ -4,6 +4,7 @@ import axiosInstance from '../../api/axiosInstance'; // Adjust the path as neede
 import {
   addCourse,
   getCourses,
+  getCoursesByTeacher,
   getNumOfStudentsInCourse
 } from '../../api/courseApi'; // Adjust the import path as needed
 
@@ -39,8 +40,9 @@ export const GetCourseById = createAsyncThunk('courses/getCourseById', async (co
   return response.data;
 });
 
-export const GetCoursesByTeacher = createAsyncThunk('courses/getCoursesByTeacher', async (teacherId) => {
-  const response = await axiosInstance.get(`/courses/teacher/${teacherId}`);
+export const GetCoursesByTeacher = createAsyncThunk('courses/getCoursesByTeacher', async (teacher) => {
+  console.log(teacher);
+  const response = await getCoursesByTeacher(teacher);
   return response.data;
 });
 

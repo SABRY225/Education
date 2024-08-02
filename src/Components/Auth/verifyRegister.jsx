@@ -18,6 +18,7 @@ function VerifyRegister() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const res=await dispatch(verifyOtpCode({ email, otp }));
+    console.log(res);
     if (res) 
     navigate('/signin');
     

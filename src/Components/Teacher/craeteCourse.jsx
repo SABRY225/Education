@@ -48,7 +48,7 @@ function CreateCourse() {
       });
 
       // Send the data to the backend
-      const res = await axios.post('http://localhost:5177/Course', formDataToSend, {
+      const res = await axios.post('http://lms.tryasp.net/Course', formDataToSend, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',

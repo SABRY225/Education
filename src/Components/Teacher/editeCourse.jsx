@@ -3,13 +3,11 @@ import './EditCourse.css';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-
-
 function EditCourse() {
   const token = useSelector((state) => state.auth.token);
   const { courseId } = useParams();
 
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState('');
   const [formData, setFormData] = useState({
     Name: '',
     Level: '',
@@ -21,7 +19,7 @@ function EditCourse() {
   });
   useEffect(()=>{
     const fatechCourse=async()=>{
-      const response = await axios.get(`http://localhost:5177/Course/by-id?id=${courseId}`, {
+      const response = await axios.get(`http://lms.tryasp.net/Course/by-id?id=${courseId}`, {
         headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'multipart/form-data',
@@ -38,8 +36,10 @@ function EditCourse() {
     });
     }
     fatechCourse();
-  },[courseId])
+    setSelectedImage(formData.courseImage);
 
+  },[courseId])
+  console.log(selectedImage);
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       setSelectedImage(URL.createObjectURL(e.target.files[0]));
@@ -61,8 +61,7 @@ function EditCourse() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const imageFile = formData.courseImage;
-  
+      const imageFile = formData.courseImage ;
       // Prepare form data
       const formDataToSend = new FormData();
       formDataToSend.append('CourseImage', imageFile);
@@ -75,7 +74,7 @@ function EditCourse() {
           console.log(key, formData[key]);
       });
       // Send the data to the backend
-      const res = await axios.put('http://localhost:5177/Course', formDataToSend, {
+      const res = await axios.put('http://lms.tryasp.net/Course', formDataToSend, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
@@ -103,7 +102,7 @@ function EditCourse() {
             <div className="mb-3">
               {selectedImage && (
                 <div className="img-preview mb-3">
-                  <img src={selectedImage} alt="Selected" className="img-fluid rounded" />
+                  <img src={`http://lms.tryasp.net${selectedImage}`} alt="Selected" className="img-fluid rounded" />
                 </div>
               )}
               <label htmlFor="courseImage" className="form-label animated-input">تحميل صورة الكورس</label>

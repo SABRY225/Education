@@ -11,10 +11,8 @@ function Signin() {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   const roles = useSelector((state) => state.auth.roles);
-  const token = useSelector((state) => state.auth.token);
+  // const token = useSelector((state) => state.auth.token);
   const navigate = useNavigate();
-  console.log(roles);
-  console.log(token);
   useEffect(() => {
     if (auth.isAuthenticated) {
       if (roles == "Student") {

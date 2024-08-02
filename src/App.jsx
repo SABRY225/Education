@@ -2,6 +2,8 @@ import Landing from './Components/Landing/Landing'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ProtectedRoutes from './Components/ProtectedRoutes/ProtectedRoutes';
 import {JustFirst, LayoutAPP,LayoutAuth} from './Layout/index';
@@ -20,7 +22,7 @@ import Books from './Components/student/books/Books';
 import AllSubjects from './Components/student/AllSubject/AllSubject';
 
 import { SignUpPage, StudentPage, TeacherPage } from './Pages/index';
-import {Dashboard,CraeteCourse, EditeCourse, Profile, SendEmail, ForgetPassword, Course, Lecture, Book, Exam} from './Components/constant/path';
+import {Dashboard,CraeteCourse, EditeCourse, Profile, SendEmail, ForgetPassword, Course, Lecture, Book, Exam, EditeLectures, AddLectures, ViewLectures} from './Components/constant/path';
  
 const routers = createBrowserRouter([
   {
@@ -42,14 +44,10 @@ const routers = createBrowserRouter([
         ]
       },
       // كل المواد اللي مشترك فيها الطالب
-      { path: "AllStuSubjexts", element: <AllStuSubjexts /> ,errorElement:(<ErrorPage />)},
-      { path: "ShowStuSubject", element: <ShowStuSubject /> ,errorElement:(<ErrorPage />)},
-      { path: "AllLessoins", element: <AllLessoins /> ,errorElement:(<ErrorPage />)},
       { path: "Quize", element: <Quize /> ,errorElement:(<ErrorPage />)},
       { path: "ShowQuize", element: <ShowQuize /> ,errorElement:(<ErrorPage />)},
       { path: "Books", element: <Books /> ,errorElement:(<ErrorPage />)},
       // كل المواد اللي علي المنصه
-      { path: "AllSubjects", element: <AllSubjects /> ,errorElement:(<ErrorPage />)},
 
     ],
     errorElement:(<ErrorPage />)
@@ -66,7 +64,14 @@ const routers = createBrowserRouter([
         path: "Student",
         element: <StudentPage />,
         children: [
-          { index:true, element: <AllStuSubjexts /> ,errorElement:(<ErrorPage />)},
+          // All Student Subjects
+          { index:true, element: <AllSubjects /> ,errorElement:(<ErrorPage />)},
+          { path:'myCourse', element: <AllStuSubjexts /> ,errorElement:(<ErrorPage />)},
+          // detiales course
+          { path: "ShowStuSubject", element: <ShowStuSubject /> ,errorElement:(<ErrorPage />)},
+          // All Lessoins in course
+          { path: "AllLessoins", element: <AllLessoins /> ,errorElement:(<ErrorPage />)},
+
         ],
       },
       {
@@ -79,6 +84,9 @@ const routers = createBrowserRouter([
           { path:':courseId/Books', element: <Book/> ,errorElement:(<ErrorPage />)},
           { path:':courseId/Exams', element: <Exam/> ,errorElement:(<ErrorPage />)},
           { path:':courseId/editCourse', element: <EditeCourse/> ,errorElement:(<ErrorPage />)},
+          { path:':courseId/:lectureId/editLecture', element: <EditeLectures/> ,errorElement:(<ErrorPage />)},
+          { path:':courseId/addLecture', element: <AddLectures/> ,errorElement:(<ErrorPage />)},
+          { path:':courseId/:lectureId/viewLectures', element: <ViewLectures/> ,errorElement:(<ErrorPage />)},
           { path:':courseId', element: <Course/> ,errorElement:(<ErrorPage />)},
           { path:'profile', element: <Profile /> ,errorElement:(<ErrorPage />)},
         ],

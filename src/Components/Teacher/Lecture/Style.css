@@ -1,95 +1,95 @@
-
-  
 .btnAdd {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.Box-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: rgb(9, 7, 7);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.Box-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.Box-name {
+  font-size: 1.5em;
+  margin: 16px 0;
+}
+
+.Box-actions {
+  display: flex;
+  justify-content: space-around;
+}
+
+.edit-button-box,
+.delete-button-box,
+.add-button,
+.view-button-box {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: opacity 0.3s ease;
+  text-decoration: none;
+}
+
+.add-button {
+  border: 1px solid#212F3D;
+  color: #212F3D;
+  background-color: #fff;
+}
+
+.view-button-box {
+  border: 1px solid#226eda;
+  color: #226eda;
+}
+
+.edit-button-box {
+  border: 1px solid#4CAF50;
+  color: #4CAF50;
+}
+
+.delete-button-box {
+  border: 1px solid#f44336;
+  color: #f44336;
+}
+
+.edit-button-box:hover,
+.delete-button-box:hover,
+.add-button-box:hover,
+.view-button-box:hover {
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .Box-actions {
+    flex-direction: column;
   }
 
-  .Box-card {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin: 16px;
-    padding: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    color: rgb(9, 7, 7);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .Box-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  }
-  
-  .Box-name {
-    font-size: 1.5em;
-    margin: 16px 0;
-  }
-  
-  .Box-actions {
-    display: flex;
-    justify-content: space-around;
-  }
-  
   .edit-button-box,
+  .view-button-box,
   .delete-button-box,
-  .add-button,
-  .view-button-box {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: opacity 0.3s ease;
-    text-decoration: none;
-  }
-  
   .add-button {
-    border: 1px solid#212F3D;
-    color: #212F3D;
-    background-color: #fff;
+    margin-bottom: 10px;
   }
-  
-  .view-button-box {
-    border: 1px solid#226eda;
-    color: #226eda;;
-  }
-  .edit-button-box {
-    border: 1px solid#4CAF50;
-    color: #4CAF50;
-  }
-  
-  .delete-button-box {
-    border: 1px solid#f44336;
-    color: #f44336;
-  }
-  
-  .edit-button-box:hover,
-  .delete-button-box:hover,
-  .add-button-box:hover,
-  .view-button-box:hover {
-    opacity: 0.8;
-  }
-  
-  @media (max-width: 768px) {
-    .Box-actions {
-      flex-direction: column;
-    }
-  
-    .edit-button-box,
-    .view-button-box,
-    .delete-button-box,
-    .add-button {
-      margin-bottom: 10px;
-    }
-  }
+}
 
 
 .form-container {
-    padding: 20px;
+  padding: 20px;
 }
-.Box-title{
+
+.Box-title {
   font-size: 2rem;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   border: 1px solid;
@@ -97,46 +97,54 @@
   margin: 0rem 0rem 2rem;
   border-radius: 15px;
 }
-.Icon-title{
+
+.Icon-title {
   border: 1px solid;
   padding: 1rem;
   border-radius: 50%;
   background-color: #000;
   color: #fff;
 }
-.Lname-title{
+
+.Lname-title {
   margin: 1rem;
 }
+
 .viewVideo {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
+  width: 100%;
 }
-.viewVideo-2 iframe{
-    width: 60vw;
-    height: 50vh;
+
+.viewVideo-2 iframe {
+  width: 60vw;
+  height: 50vh;
 }
+
 .viewVideo iframe {
   width: 60vw;
   height: 50vh;
 }
+
 .viewBook iframe {
   width: 45vw;
   height: 100vh;
 }
+
 .form-container label {
-    display: block;
-    margin-top: 10px;
+  display: block;
+  margin-top: 10px;
 }
 
 .form-container input[type="file"],
 .form-container input[type="text"] {
-    width: 100%;
-    margin-top: 5px;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+  width: 100%;
+  margin-top: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
 .form-container button {
-    margin-top: 20px;
-    width: 250px;
+  margin-top: 20px;
+  width: 250px;
 }

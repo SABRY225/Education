@@ -85,6 +85,7 @@
     font-style: inherit;
     font-size: 20px;
     text-decoration: none;
+    margin-right: 1rem;
   }
   .DashboardLink:hover{
     text-decoration: underline;

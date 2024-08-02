@@ -48,6 +48,14 @@ function Navbar() {
                                 </>
                             ) : (
                                 <>
+                                        <div className="col-md-7">
+                                        <Link to="/Student" className='DashboardLink' >
+                                            Dashboard
+                                        </Link>
+                                        <Link to="/Student/myCourse" className='DashboardLink' >
+                                           My Courses
+                                        </Link>
+                                    </div>
                                     <div className="NameUser">{firstName} {lastName}</div>
                                     <Link to="/Teacher/profile">
                                         <img src={userImg} alt="User" style={{ width: "50px", marginLeft: "10px" }} />

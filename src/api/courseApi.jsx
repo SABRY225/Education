@@ -89,9 +89,14 @@ export const getCourseById = async (courseId) => {
 };
 
 // Function to get courses by teacher
-export const getCoursesByTeacher = async (teacherId) => {
+export const getCoursesByTeacher = async (teacher) => {
   try {
-    const response = await axiosInstance.get(`/teachers/${teacherId}/courses`);
+    const response = await axiosInstance.get(`/Course/teacher-courses?teacherId=${teacher.teacherId}`,{
+      headers: {
+        Authorization: `Bearer ${teacher.token}`,
+        'Content-Type': 'application/json'
+      }
+    });
     return response.data;
   } catch (error) {
     console.error("Error fetching courses by teacher:", error);

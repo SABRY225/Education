@@ -39,6 +39,7 @@ function Student() {
     }
     // const jsonData=JSON.stringify(formData)
     await dispatch(signUpUser(formData));
+    localStorage.setItem('email',formData.email);
     navigate('/signup/verifyRegister');
 
   };

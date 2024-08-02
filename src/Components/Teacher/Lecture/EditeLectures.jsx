@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 function EditeLectures() {
     const [videoSrc, setVideoSrc] = useState('https://youtu.be/p3F0IqMQQpg?si=wR1DEylwsbZuaRSx');

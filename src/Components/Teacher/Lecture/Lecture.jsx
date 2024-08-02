@@ -2,12 +2,13 @@ import { useState } from 'react';
 import LectureCard from './LectureCard';
 import data from '../data/courses';
 import { Modal, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import './Style.css';
 
 function Lecture() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [courses, setCourses] = useState(data);
+  const { courseId } = useParams();
   const [selectedCourse, setSelectedCourse] = useState(null);
 
   const handleEdit = (course) => {
@@ -32,7 +33,7 @@ function Lecture() {
   return (
     <div className='container'>
       <div className="btnAdd">
-        <Link to="/addLecture" className='add-button'>
+        <Link to={`/Teacher/${courseId}/addLecture`} className='add-button'>
         <i className="fas fa-book-open"></i> أضافة درس 
         </Link>
       </div>
