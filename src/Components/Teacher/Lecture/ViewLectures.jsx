@@ -5,8 +5,7 @@ import { useParams } from 'react-router-dom';
 
 function ViewLectures() {
     const [lecture, setLecture] = useState('تفاضل وتكامل');
-  const { courseId,lectureId } = useParams();
-  console.log(courseId);
+  const { lectureId } = useParams();
   console.log(lectureId);
   const token = useSelector((state) => state.auth.token);
 

@@ -11,3 +11,6 @@ export {default as Book} from "../Teacher/Book/Book";
 export {default as EditeLectures} from "../Teacher/Lecture/EditeLectures";
 export {default as ViewLectures} from "../Teacher/Lecture/ViewLectures";
 export {default as AddLectures} from "../Teacher/Lecture/AddLectures";
+export {default as AddBook} from "../Teacher/Book/AddBook";
+export {default as EditeBook} from "../Teacher/Book/EditeBook";
+export {default as ViewBook} from "../Teacher/Book/ViewBook";

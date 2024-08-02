@@ -1,18 +1,22 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
-const BookCard = ({ LectureName, onEdit, onDelete }) => {
+const BookCard = ({ bookTitle,bookId, onEdit, onDelete }) => {
+  console.log(bookId);
+  const { courseId } = useParams();
+  console.log(courseId);
+
   return (
     <div className="Box-card">
-      <h3 className="Box-name">{LectureName}</h3>
+      <h3 className="Box-name">{bookTitle}</h3>
       <div className="Box-actions">
         <button onClick={onDelete} className="delete-button-box">
           <i className="fas fa-trash-alt"></i> حذف
         </button>
-        <Link to="/editeBook" onClick={onEdit} className="edit-button-box">
+        <Link to={`/Teacher/${courseId}/${bookId}/editBook`} onClick={onEdit} className="edit-button-box">
           <i className="fas fa-edit"></i> تعديل
         </Link>
-        <Link to="/viewBook" className="view-button-box">
+        <Link to={`/Teacher/${courseId}/${bookId}/viewBook`} className="view-button-box">
           <i className="fas fa-eye"></i> عرض
         </Link>
       </div>

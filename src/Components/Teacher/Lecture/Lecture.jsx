@@ -50,7 +50,6 @@ function Lecture() {
       },
      });
      console.log(res.data);
-    
   };
 
   return (

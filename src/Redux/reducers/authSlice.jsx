@@ -11,6 +11,7 @@ import {
   updatePassword,
   requestPasswordReset,
   resetUserPassword,
+  updateUserImg
 } from '../actions/authActions';
 
 const initialState = {
@@ -18,6 +19,7 @@ const initialState = {
   id: null,
   firstName: null,
   lastName: null,
+  image:null,
   email: null,
   phoneNumber: null,
   govenorate: null,
@@ -146,6 +148,7 @@ const authSlice = createSlice({
         state.email = action.payload.email;
         state.phoneNumber = action.payload.phoneNumber;
         state.govenorate = action.payload.govenorate;
+        state.image = action.payload.image;
       })
       .addCase(fetchCurrentUser.rejected, (state, action) => {
         state.loading = false;
@@ -160,6 +163,18 @@ const authSlice = createSlice({
         state.user = action.payload.user;
       })
       .addCase(updateUserInfo.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(updateUserImg.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateUserImg.fulfilled, (state, action) => {
+        state.loading = false;
+        state.image = action.payload.image;
+      })
+      .addCase(updateUserImg.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })

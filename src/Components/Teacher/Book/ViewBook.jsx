@@ -1,8 +1,36 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 function ViewBook() {
-    const [BookSrc, setBookSrc] = useState('blob:http://localhost:5173/6eaac059-d487-412f-8959-60cdda9a9cd9');
-    const [lectureName, setLectureName] = useState('تفاضل وتكامل');
+    const [Book, setBook] = useState(null);
+    const [BookSrc, setBookSrc] = useState('');
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const { bookId } = useParams();
+    const token = useSelector((state) => state.auth.token);
+
+    useEffect(() => {
+        const fetchBook = async () => {
+            try {
+                const res = await axios.get(`http://lms.tryasp.net/Book/by-id?id=${bookId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+                console.log(res.data);
+                setBook(res.data);
+                setBookSrc(`http://lms.tryasp.net${res.data.bookUrl}`);
+            } catch (err) {
+                console.error("Error fetching book data:", err);
+                setError('Failed to fetch book data. Please try again later.');
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchBook();
+    }, [token, bookId]);
 
     return (
         <div className="container text-center text-black">
@@ -11,27 +39,37 @@ function ViewBook() {
                     <div className="col">
                         <div className='Box-title'>
                             <span className='Lname-title'>
-                                {lectureName}
+                                {Book?.title || 'Loading...'}
                             </span>
                             <span className='Icon-title'>
                                 <i className="fas fa-book"></i>
                             </span>
                         </div>
-                        {BookSrc && (
-                            <div className="viewBook">
-                                <iframe
-                                    src={BookSrc}
-                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                    allowFullScreen
-                                    title="Embedded Book"
-                                    style={{
-                                        width: '100%',
-                                        height: '500px',
-                                        border: 'none'
-                                    }}
-                                    sandbox="allow-same-origin allow-scripts"
-                                ></iframe>
+                        {loading ? (
+                            <div className="alert alert-info" role="alert">
+                                Loading...
                             </div>
+                        ) : error ? (
+                            <div className="alert alert-danger" role="alert">
+                                {error}
+                            </div>
+                        ) : (
+                            BookSrc && (
+                                <div className="viewBook">
+                                    <iframe
+                                        src={BookSrc}
+                                        // allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                        // allowFullScreen
+                                        title="Embedded Book"
+                                        style={{
+                                            width: '100%',
+                                            height: '1000px',
+                                            border: 'none'
+                                        }}
+                                        // sandbox="allow-forms allow-scripts allow-same-origin"
+                                    ></iframe>
+                                </div>
+                            )
                         )}
                     </div>
                 </div>

@@ -10,7 +10,8 @@ import {
     editInfoUser,
     changePassword,
     forgetPassword,
-    resetPassword
+    resetPassword,
+    editInfoUserImg
   } from '../../api/authApi'; // Adjust the import path as needed
   
   // Async thunks for authentication actions
@@ -88,6 +89,15 @@ import {
     console.log(infoData);
     try {
       const data = await editInfoUser(infoData);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  });
+  export const updateUserImg = createAsyncThunk('Teacher/image', async (infoData, { rejectWithValue }) => {
+    console.log(infoData);
+    try {
+      const data = await editInfoUserImg(infoData);
       return data;
     } catch (error) {
       return rejectWithValue(error);

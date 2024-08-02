@@ -1,15 +1,32 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BookCard from './BookCard';
-import data from '../data/courses';
 import { Modal, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import '../Lecture/Style.css';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 function Book() {
+  const { courseId } = useParams();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [courses, setCourses] = useState(data);
+  const [Books, setBooks] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState(null);
+  const token = useSelector((state) => state.auth.token);
 
+  useEffect(() => {
+    const fetchFun= async()=>{
+       const res=await axios.get(`http://lms.tryasp.net/Book/all-in-course?courseId=${courseId}`,{
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+       });
+       console.log(res.data);
+       setBooks(res.data);
+    }
+    fetchFun();
+
+  }, [token,courseId]);
   const handleEdit = (course) => {
     console.log(course.id);
   };
@@ -24,26 +41,33 @@ function Book() {
     setSelectedCourse(null);
   };
 
-  const handleDelete = () => {
-    setCourses(courses.filter(course => course.id !== selectedCourse.id));
+  const handleDelete = async() => {
+    setBooks(Books.filter(course => course.id !== selectedCourse.id));
     handleCloseDeleteModal();
+    const res=await axios.delete(`http://lms.tryasp.net/Book?id=${selectedCourse.id}`,{
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+     });
+     console.log(res.data);
   };
 
   return (
     <div className='container'>
       <div className="btnAdd">
-        <Link to="/addBook" className='add-button'>
+        <Link to={`/Teacher/${courseId}/addBook`} className='add-button'>
         <i className="fas fa-book"></i> أضافة كتاب 
         </Link>
       </div>
       <div className='text-center bg-light rounded shadow p-5 m-4'>
         <div className="row text-center">
-          {courses.map((course, index) => (
+          {Books.map((book, index) => (
             <div className="col-md-12 col-sm-12" key={index}>
               <BookCard
-                LectureName={course.name}
-                onEdit={() => handleEdit(course)}
-                onDelete={() => handleShowDeleteModal(course)}
+                bookTitle={book.title}
+                bookId={book.id}
+                onEdit={() => handleEdit(book)}
+                onDelete={() => handleShowDeleteModal(book)}
               />
             </div>
           ))}

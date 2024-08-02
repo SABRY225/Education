@@ -9,6 +9,7 @@ function Navbar() {
     const role = useSelector((state) => state.auth.roles);
     const lastName = useSelector((state) => state.auth.lastName);
     const currentUser = useSelector((state) => state.auth.isAuthenticated);
+    const imgUser = useSelector((state) => state.auth.image);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -40,7 +41,7 @@ function Navbar() {
                                     </div>
                                     <div className="NameUser">{firstName} {lastName}</div>
                                     <Link  to="/Teacher/profile">
-                                        <img src={userImg} alt="User" style={{ width: "50px", marginLeft: "10px" }} />
+                                        <img src={imgUser?`http://lms.tryasp.net${imgUser}`:userImg} alt="User" style={{ width: "60px",height:"50px",borderRadius:"50%", marginLeft: "10px" }} />
                                     </Link>
                                     <div className="logout-link" onClick={handleLogout}>
                                         تسجيل الخروج

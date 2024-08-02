@@ -22,7 +22,7 @@ import Books from './Components/student/books/Books';
 import AllSubjects from './Components/student/AllSubject/AllSubject';
 
 import { SignUpPage, StudentPage, TeacherPage } from './Pages/index';
-import {Dashboard,CraeteCourse, EditeCourse, Profile, SendEmail, ForgetPassword, Course, Lecture, Book, Exam, EditeLectures, AddLectures, ViewLectures} from './Components/constant/path';
+import {Dashboard,CraeteCourse, EditeCourse, Profile, SendEmail, ForgetPassword, Course, Lecture, Book, Exam, EditeLectures, AddLectures, ViewLectures, AddBook, ViewBook, EditeBook} from './Components/constant/path';
  
 const routers = createBrowserRouter([
   {
@@ -87,6 +87,9 @@ const routers = createBrowserRouter([
           { path:':courseId/:lectureId/editLecture', element: <EditeLectures/> ,errorElement:(<ErrorPage />)},
           { path:':courseId/addLecture', element: <AddLectures/> ,errorElement:(<ErrorPage />)},
           { path:':courseId/:lectureId/viewLectures', element: <ViewLectures/> ,errorElement:(<ErrorPage />)},
+          { path:':courseId/addBook', element: <AddBook/> ,errorElement:(<ErrorPage />)},
+          { path:':courseId/:bookId/viewBook', element: <ViewBook/> ,errorElement:(<ErrorPage />)},
+          { path:':courseId/:bookId/editBook', element: <EditeBook/> ,errorElement:(<ErrorPage />)},
           { path:':courseId', element: <Course/> ,errorElement:(<ErrorPage />)},
           { path:'profile', element: <Profile /> ,errorElement:(<ErrorPage />)},
         ],

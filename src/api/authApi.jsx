@@ -105,6 +105,23 @@ export const editInfoUser = async (infoData) => {
     return handleError(error);
   }
 };
+export const editInfoUserImg = async (infoData) => {
+  console.log(infoData);
+  const formData = new FormData();
+  formData.append('newImage', infoData.profileImageFile);
+  try {
+    const response = await axiosInstance.put("Teacher/image", formData,{
+      headers: {
+        Authorization: `Bearer ${infoData.token}`,
+        'Content-Type': 'multipart/form-data',
+
+      }
+    });
+    return response.data;
+  } catch (error) {
+    return handleError(error);
+  }
+};
 
 // Change user password
 export const changePassword = async (passwordData) => {
