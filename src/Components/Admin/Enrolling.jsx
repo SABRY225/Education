@@ -7,11 +7,11 @@ import { useSelector } from 'react-redux';
 function Enrolling() {
   const [studentEmail, setStudentEmail] = useState('');
   const [courseCode, setCourseCode] = useState('');
+  const token = useSelector((state) => state.auth.token);
 
   const handleEnroll = async (e) => {
     e.preventDefault();
     try {
-      const token = useSelector((state) => state.auth.token);
       const response = await axios.post(
         'http://localhost:5177/Course/enroll',
         {},
