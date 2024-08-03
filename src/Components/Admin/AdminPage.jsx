@@ -4,6 +4,7 @@ import Statistics from './Statistics';
 import Enrolling from './Enrolling';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { signOutUser } from '../../Redux/actions/authActions';
 
 function AdminPage() {
   const [activeComponent, setActiveComponent] = useState('statistics');
