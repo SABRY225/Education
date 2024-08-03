@@ -14,9 +14,9 @@ function Header() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const studentResponse = await axios.get(`http://localhost:5177/Student/count`);
-        const teacherResponse = await axios.get(`http://localhost:5177/Teacher/count`);
-        const courseResponse = await axios.get(`http://localhost:5177/Course/count`);
+        const studentResponse = await axios.get(`http://lms.tryasp.net/Student/count`);
+        const teacherResponse = await axios.get(`http://lms.tryasp.net/Teacher/count`);
+        const courseResponse = await axios.get(`http://lms.tryasp.net/Course/count`);
         console.log(courseResponse.data);
         setStudent(studentResponse.data);
         setTeacher(teacherResponse.data);

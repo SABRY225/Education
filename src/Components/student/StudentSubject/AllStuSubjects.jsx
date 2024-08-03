@@ -1,4 +1,4 @@
-  import React from "react";
+
 import img1 from ".././media/image.png";  
 
 const subjects = [
@@ -31,7 +31,7 @@ const subjects = [
    
 ];
 
-function AllStuSubjexts() {
+function AllStuSubjects() {
   return (
 
     <div className="row   rtl   fw-normal " style={{height:'100%'}}>
@@ -57,4 +57,4 @@ function AllStuSubjexts() {
   );
 }
 
-export default AllStuSubjexts;
+export default AllStuSubjects;

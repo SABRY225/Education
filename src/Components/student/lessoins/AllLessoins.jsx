@@ -1,5 +1,6 @@
-import React from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBook } from "@fortawesome/free-solid-svg-icons";
 
 const lessons = [
   { id: 1, title: "الدرس 1", subject: "تكامل وتفاضل" },
@@ -11,33 +12,36 @@ const lessons = [
 
 function AllLessoins() {
   return (
-    <>
-      <div style={{ direction: "rtl" }} className="m-5">
-        <div className="row">
-          <p className="col-xl-2 col-md-3 fs-3 my-2 fw-bold rounded-4 border-4 border-info">
-            الدروس
-          </p>
-        </div>
-
-        <div
-          className="col-10 border border-secondary-subtle border-4 rounded-4 my-3 p-4"
-          style={{ minHeight: "60vh" }}
-        >
-          {lessons.map((lesson) => (
-            <div key={lesson.id} className="mt-3">
-              <Link
-                to="/"
-                className="row rounded-4 border-4 btn btn-outline-info"
-                style={{ color: "black", marginTop: "10px" }}
-              >
-                <div className="col-2 fs-4">{lesson.title}:</div>
-                <div className="col-10 text-end">{lesson.subject}</div>
-              </Link>
-            </div>
-          ))}
-        </div>
+    <div style={{ direction: "rtl" }} className="m-5">
+      <div className="row text-center" >
+        <p className="sectionLessoin col-xl-2 col-md-3 fs-3 my-2 fw-bold rounded-4 border-4 border-info">
+        <FontAwesomeIcon icon={faBook} className="me-2" />&nbsp;&nbsp;
+          الدروس
+        </p>
       </div>
-    </>
+       <div className="row justify-content-center">
+      <div
+        className="col-10 border border-secondary-subtle border-4 rounded-4 my-3 p-4 "
+        style={{ minHeight: "60vh" }}
+      >
+        {lessons.map((lesson,index) => (
+          <div key={index} className="mt-3">
+            <Link
+              to="/"
+              className="row rounded-4 border-4 btn btn-outline-info"
+              style={{ color: "black", marginTop: "10px" }}
+            >
+              <div className="col-2 fs-4">
+                <FontAwesomeIcon icon={faBook} className="me-2" />&nbsp;&nbsp;  
+              </div>
+              <div className="col-10 text-end">{lesson.subject}</div>
+            </Link>
+          </div>
+        ))}
+      </div>        
+       </div>
+
+    </div>
   );
 }
 

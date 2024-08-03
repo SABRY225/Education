@@ -13,16 +13,10 @@ import { Provider } from 'react-redux';
 import {Signin,SignUp,Teacher,Student, VerifyRegister} from './Components/Auth/index';
 
 //Subjects
-import AllStuSubjexts from './Components/student/StudentSubject/AllStuSubjexts';
-import ShowStuSubject from './Components/student/StudentSubject/ShowStuSubject';
-import AllLessoins from './Components/student/lessoins/AllLessoins';
-import Quize from './Components/student/quizes/Quize';
 import ShowQuize from './Components/student/quizes/ShowQuize';
-import Books from './Components/student/books/Books';
-import AllSubjects from './Components/student/AllSubject/AllSubject';
 
 import { SignUpPage, StudentPage, TeacherPage } from './Pages/index';
-import {Dashboard,CraeteCourse, EditeCourse, Profile, SendEmail, ForgetPassword, Course, Lecture, Book, Exam, EditeLectures, AddLectures, ViewLectures, AddBook, ViewBook, EditeBook} from './Components/constant/path';
+import {Dashboard,CraeteCourse, EditeCourse, Profile, SendEmail, ForgetPassword, Course, Lecture, Book, Exam, EditeLectures, AddLectures, ViewLectures, AddBook, ViewBook, EditeBook, AllSubjects, AllStuSubjects, AllLessoins, ShowStuSubject, Quize, Books} from './Components/constant/path';
  
 const routers = createBrowserRouter([
   {
@@ -44,9 +38,7 @@ const routers = createBrowserRouter([
         ]
       },
       // كل المواد اللي مشترك فيها الطالب
-      { path: "Quize", element: <Quize /> ,errorElement:(<ErrorPage />)},
       { path: "ShowQuize", element: <ShowQuize /> ,errorElement:(<ErrorPage />)},
-      { path: "Books", element: <Books /> ,errorElement:(<ErrorPage />)},
       // كل المواد اللي علي المنصه
 
     ],
@@ -66,11 +58,15 @@ const routers = createBrowserRouter([
         children: [
           // All Student Subjects
           { index:true, element: <AllSubjects /> ,errorElement:(<ErrorPage />)},
-          { path:'myCourse', element: <AllStuSubjexts /> ,errorElement:(<ErrorPage />)},
+          { path:'myCourse', element: <AllStuSubjects /> ,errorElement:(<ErrorPage />)},
           // detiales course
-          { path: "ShowStuSubject", element: <ShowStuSubject /> ,errorElement:(<ErrorPage />)},
+          { path: ":courseId", element: <ShowStuSubject /> ,errorElement:(<ErrorPage />)},
           // All Lessoins in course
-          { path: "AllLessoins", element: <AllLessoins /> ,errorElement:(<ErrorPage />)},
+          { path: ":courseId/lessoinsOfCourse", element: <AllLessoins /> ,errorElement:(<ErrorPage />)},
+          // All quize in course
+          { path: ":courseId/quizeOfCourse", element: <Quize /> ,errorElement:(<ErrorPage />)},
+          // All books in course
+          { path: ":courseId/booksOfCourse", element: <Books /> ,errorElement:(<ErrorPage />)},
 
         ],
       },
