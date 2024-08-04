@@ -17,8 +17,10 @@ function Signin() {
     if (auth.isAuthenticated) {
       if (roles == "Student") {
         navigate('/Student');
-      } else {
+      } else if (roles == "Teacher"){
         navigate('/Teacher'); // Adjust as needed
+      } else {
+        navigate('/Admin'); // Adjust as needed
       }
     }
   }, [auth, roles, navigate]);

@@ -17,6 +17,9 @@ import ShowQuize from './Components/student/quizes/ShowQuize';
 
 import { SignUpPage, StudentPage, TeacherPage } from './Pages/index';
 import {Dashboard,CraeteCourse, EditeCourse, Profile, SendEmail, ForgetPassword, Course, Lecture, Book, Exam, EditeLectures, AddLectures, ViewLectures, AddBook, ViewBook, EditeBook, AllSubjects, AllStuSubjects, AllLessoins, ShowStuSubject, Quize, Books, Lession, DisplyBook} from './Components/constant/path';
+
+import Admin from './Pages/Admin';
+import AdminPage from './Components/Admin/AdminPage';
  
 const routers = createBrowserRouter([
   {
@@ -90,6 +93,13 @@ const routers = createBrowserRouter([
           { path:':courseId/:bookId/editBook', element: <EditeBook/> ,errorElement:(<ErrorPage />)},
           { path:':courseId', element: <Course/> ,errorElement:(<ErrorPage />)},
           { path:'profile', element: <Profile /> ,errorElement:(<ErrorPage />)},
+        ],
+      },
+      {
+        path: "Admin",
+        element: <Admin />,
+        children: [
+          { index:true, element: <AdminPage/> ,errorElement:(<ErrorPage />)},
         ],
       },
       {
