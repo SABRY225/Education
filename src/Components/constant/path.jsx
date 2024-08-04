@@ -22,3 +22,5 @@ export {default as AllStuSubjects} from "../student/StudentSubject/AllStuSubject
 export {default as Quize} from "../student/quizes/Quize";
 export {default as ShowQuize} from "../student/quizes/ShowQuize";
 export {default as Books} from "../student/books/Books";
+export {default as DisplyBook} from "../student/books/DisplyBook";
+export {default as Lession} from "../student/lessoins/Lession";

@@ -1,14 +1,14 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
-function ViewLectures() {
+function Lession() {
     const [lecture, setLecture] = useState('تفاضل وتكامل');
     const { lectureId } = useParams();
     console.log(lectureId);
     const token = useSelector((state) => state.auth.token);
-
+   console.log(lectureId);
     useEffect(() => {
         const fetchFun = async () => {
             const res = await axios.get(`http://lms.tryasp.net/Lecture/by-id?id=${lectureId}`, {
@@ -53,4 +53,4 @@ function ViewLectures() {
     );
 }
 
-export default ViewLectures;
+export default Lession

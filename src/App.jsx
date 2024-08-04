@@ -16,7 +16,7 @@ import {Signin,SignUp,Teacher,Student, VerifyRegister} from './Components/Auth/i
 import ShowQuize from './Components/student/quizes/ShowQuize';
 
 import { SignUpPage, StudentPage, TeacherPage } from './Pages/index';
-import {Dashboard,CraeteCourse, EditeCourse, Profile, SendEmail, ForgetPassword, Course, Lecture, Book, Exam, EditeLectures, AddLectures, ViewLectures, AddBook, ViewBook, EditeBook, AllSubjects, AllStuSubjects, AllLessoins, ShowStuSubject, Quize, Books} from './Components/constant/path';
+import {Dashboard,CraeteCourse, EditeCourse, Profile, SendEmail, ForgetPassword, Course, Lecture, Book, Exam, EditeLectures, AddLectures, ViewLectures, AddBook, ViewBook, EditeBook, AllSubjects, AllStuSubjects, AllLessoins, ShowStuSubject, Quize, Books, Lession, DisplyBook} from './Components/constant/path';
  
 const routers = createBrowserRouter([
   {
@@ -63,10 +63,12 @@ const routers = createBrowserRouter([
           { path: ":courseId", element: <ShowStuSubject /> ,errorElement:(<ErrorPage />)},
           // All Lessoins in course
           { path: ":courseId/lessoinsOfCourse", element: <AllLessoins /> ,errorElement:(<ErrorPage />)},
+          { path: ":courseId/:lectureId", element: <Lession /> ,errorElement:(<ErrorPage />)},
           // All quize in course
           { path: ":courseId/quizeOfCourse", element: <Quize /> ,errorElement:(<ErrorPage />)},
           // All books in course
           { path: ":courseId/booksOfCourse", element: <Books /> ,errorElement:(<ErrorPage />)},
+          { path: ":courseId/:bookId/viewBook", element: <DisplyBook /> ,errorElement:(<ErrorPage />)},
 
         ],
       },

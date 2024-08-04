@@ -3,13 +3,12 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-function ViewBook() {
+function DisplyBook() {
     const [Book, setBook] = useState(null);
     const [BookSrc, setBookSrc] = useState('');
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
     const { bookId } = useParams();
-    console.log(bookId);
     const token = useSelector((state) => state.auth.token);
 
     useEffect(() => {
@@ -79,4 +78,4 @@ function ViewBook() {
     );
 }
 
-export default ViewBook;
+export default DisplyBook;
