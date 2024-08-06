@@ -60,7 +60,7 @@ function Navbar() {
                                     </div>
                                     <div className="NameUser">{firstName} {lastName}</div>
                                     <Link to="/Teacher/profile">
-                                        <img src={`${baseURL}${userImg}`} alt="User" style={{ width: "50px", marginLeft: "10px" }} />
+                                        <img src={`${userImg}`} alt="User" style={{ width: "50px", marginLeft: "10px" }} />
                                     </Link>
                                     <div className="logout-link" onClick={handleLogout}>
                                         تسجيل الخروج
