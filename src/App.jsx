@@ -20,6 +20,8 @@ import {Dashboard,CraeteCourse, EditeCourse, Profile, SendEmail, ForgetPassword,
 
 import Admin from './Pages/Admin';
 import AdminPage from './Components/Admin/AdminPage';
+import AddExam from './Components/Teacher/Exam/AddExam';
+import ViewExam from './Components/Teacher/Exam/ViewExam';
  
 const routers = createBrowserRouter([
   {
@@ -84,6 +86,9 @@ const routers = createBrowserRouter([
           { path:':courseId/Lectures', element: <Lecture/> ,errorElement:(<ErrorPage />)},
           { path:':courseId/Books', element: <Book/> ,errorElement:(<ErrorPage />)},
           { path:':courseId/Exams', element: <Exam/> ,errorElement:(<ErrorPage />)},
+          { path: 'viewExam/:examId', element: <ViewExam />, errorElement: <ErrorPage /> },
+          // { path:':editExam/examId', element: <EditExam/> ,errorElement:(<ErrorPage />)},
+          { path:':courseId/addExam', element: <AddExam/> ,errorElement:(<ErrorPage />)},
           { path:':courseId/editCourse', element: <EditeCourse/> ,errorElement:(<ErrorPage />)},
           { path:':courseId/:lectureId/editLecture', element: <EditeLectures/> ,errorElement:(<ErrorPage />)},
           { path:':courseId/addLecture', element: <AddLectures/> ,errorElement:(<ErrorPage />)},

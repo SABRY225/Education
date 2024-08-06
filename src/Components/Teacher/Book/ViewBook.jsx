@@ -15,14 +15,14 @@ function ViewBook() {
     useEffect(() => {
         const fetchBook = async () => {
             try {
-                const res = await axios.get(`http://lms.tryasp.net/Book/by-id?id=${bookId}`, {
+                const res = await axios.get(`http://localhost:5177/Book/by-id?id=${bookId}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                     },
                 });
                 console.log(res.data);
                 setBook(res.data);
-                setBookSrc(`http://lms.tryasp.net${res.data.bookUrl}`);
+                setBookSrc(`http://localhost:5177/${res.data.bookUrl}`);
             } catch (err) {
                 console.error("Error fetching book data:", err);
                 setError('Failed to fetch book data. Please try again later.');

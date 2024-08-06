@@ -15,7 +15,7 @@ function Book() {
 
   useEffect(() => {
     const fetchFun= async()=>{
-       const res=await axios.get(`http://lms.tryasp.net/Book/all-in-course?courseId=${courseId}`,{
+       const res=await axios.get(`http://localhost:5177/Book/all-in-course?courseId=${courseId}`,{
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
@@ -44,7 +44,7 @@ function Book() {
   const handleDelete = async() => {
     setBooks(Books.filter(course => course.id !== selectedCourse.id));
     handleCloseDeleteModal();
-    const res=await axios.delete(`http://lms.tryasp.net/Book?id=${selectedCourse.id}`,{
+    const res=await axios.delete(`http://localhost:5177/Book?id=${selectedCourse.id}`,{
       headers: {
         'Authorization': `Bearer ${token}`,
       },

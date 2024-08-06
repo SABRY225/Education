@@ -17,7 +17,7 @@ function Dashboard() {
 
   useEffect(() => {
     const fetchFun= async()=>{
-       const res=await axios.get(`http://lms.tryasp.net/Course/teacher-courses?teacherId=${teacherId}`,{
+       const res=await axios.get(`http://localhost:5177/Course/teacher-courses?teacherId=${teacherId}`,{
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
@@ -54,7 +54,7 @@ function Dashboard() {
     setCourses((prevCourses) => prevCourses.filter(course => course.id !== selectedCourse.id));
     const fetchCourseData = async () => {
       try {
-        await axios.delete(`http://lms.tryasp.net/Course?id=${selectedCourse.id}`, {
+        await axios.delete(`http://localhost:5177/http://lms.tryasp.net/Course?id=${selectedCourse.id}`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },

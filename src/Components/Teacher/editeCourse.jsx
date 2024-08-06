@@ -19,7 +19,7 @@ function EditCourse() {
   });
   useEffect(()=>{
     const fatechCourse=async()=>{
-      const response = await axios.get(`http://lms.tryasp.net/Course/by-id?id=${courseId}`, {
+      const response = await axios.get(`http://localhost:5177/Course/by-id?id=${courseId}`, {
         headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'multipart/form-data',

@@ -14,7 +14,7 @@ const CourseCard = ({ imgSrc, courseName, courseId, onEdit, onDelete }) => {
     return (
         <>
             <div className="course-image">
-                <img src={`http://lms.tryasp.net${imgSrc}`} alt={courseName} />
+                <img src={`http://localhost:5177/${imgSrc}`} alt={courseName} />
             </div>
             <h3 className="course-name">{courseName}</h3>
             <div className="course-actions">

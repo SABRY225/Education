@@ -36,7 +36,7 @@ function AddBook() {
     formDataToSend.append('Title', formData.Title);
 
     try {
-      const res = await axios.post('http://lms.tryasp.net/Book', formDataToSend, {
+      const res = await axios.post('http://localhost:5177/Book', formDataToSend, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
