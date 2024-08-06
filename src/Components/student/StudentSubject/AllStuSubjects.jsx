@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import img1 from '.././media/image.png';  
 import { useSelector } from 'react-redux';
-
+import {baseURL} from '../../../api/axiosInstance'
 function AllStuSubjects() {
   const [subjects, setSubjects] = useState([]);
   const token = useSelector((state) => state.auth.token);
   useEffect(() => {
-    axios.get('http://localhost:5177/Course/all', {
+    axios.get(`${baseURL}Course/all`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -26,7 +26,7 @@ function AllStuSubjects() {
           <div className="p-5 border border-4 border-info rounded m-4">
             <div className="img row">
               <img 
-                src={subject.image ? `http://localhost:5177${subject.image}` : img1} 
+                src={subject.image ? `${baseURL}${subject.image}` : img1} 
                 className="w-100" 
                 alt={subject.name} 
               />

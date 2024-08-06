@@ -3,6 +3,8 @@ import './EditCourse.css';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import {baseURL} from '../../api/axiosInstance'
+
 function EditCourse() {
   const token = useSelector((state) => state.auth.token);
   const { courseId } = useParams();
@@ -19,7 +21,7 @@ function EditCourse() {
   });
   useEffect(()=>{
     const fatechCourse=async()=>{
-      const response = await axios.get(`http://localhost:5177/Course/by-id?id=${courseId}`, {
+      const response = await axios.get(`${baseURL}Course/by-id?id=${courseId}`, {
         headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'multipart/form-data',
@@ -74,7 +76,7 @@ function EditCourse() {
           console.log(key, formData[key]);
       });
       // Send the data to the backend
-      const res = await axios.put('http://lms.tryasp.net/Course', formDataToSend, {
+      const res = await axios.put(`${baseURL}Course`, formDataToSend, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
@@ -102,7 +104,7 @@ function EditCourse() {
             <div className="mb-3">
               {selectedImage && (
                 <div className="img-preview mb-3">
-                  <img src={`http://lms.tryasp.net${selectedImage}`} alt="Selected" className="img-fluid rounded" />
+                  <img src={`${baseURL}${selectedImage}`} alt="Selected" className="img-fluid rounded" />
                 </div>
               )}
               <label htmlFor="courseImage" className="form-label animated-input">تحميل صورة الكورس</label>

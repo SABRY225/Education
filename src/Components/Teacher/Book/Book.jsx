@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import '../Lecture/Style.css';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import {baseURL} from '../../../api/axiosInstance'
 
 function Book() {
   const { courseId } = useParams();
@@ -15,7 +16,7 @@ function Book() {
 
   useEffect(() => {
     const fetchFun= async()=>{
-       const res=await axios.get(`http://localhost:5177/Book/all-in-course?courseId=${courseId}`,{
+       const res=await axios.get(`${baseURL}Book/all-in-course?courseId=${courseId}`,{
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
@@ -44,7 +45,7 @@ function Book() {
   const handleDelete = async() => {
     setBooks(Books.filter(course => course.id !== selectedCourse.id));
     handleCloseDeleteModal();
-    const res=await axios.delete(`http://localhost:5177/Book?id=${selectedCourse.id}`,{
+    const res=await axios.delete(`${baseURL}Book?id=${selectedCourse.id}`,{
       headers: {
         'Authorization': `Bearer ${token}`,
       },

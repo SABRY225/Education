@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import {baseURL} from '../../../api/axiosInstance'
 
 function AddExam() {
     const { courseId } = useParams();
@@ -52,7 +53,7 @@ function AddExam() {
         };
     
         try {
-            const examResponse = await axios.post('http://localhost:5177/Exam', examData, {
+            const examResponse = await axios.post(`${baseURL}Exam`, examData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',
@@ -76,7 +77,7 @@ function AddExam() {
                 };
     console.log(questionData);
     
-                const questionResponse = await axios.post('http://localhost:5177/Question', questionData, {
+                const questionResponse = await axios.post(`${baseURL}Question`, questionData, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json',
@@ -102,7 +103,7 @@ function AddExam() {
                         questionId: questionId
                     };
     
-                    const answerResponse = await axios.post('http://localhost:5177/Answer', answerData, {
+                    const answerResponse = await axios.post(`${baseURL}Answer`, answerData, {
                         headers: {
                             'Authorization': `Bearer ${token}`,
                             'Content-Type': 'application/json',

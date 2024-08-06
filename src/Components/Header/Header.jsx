@@ -3,6 +3,7 @@ import person from '../../assets/person.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import {baseURL} from '../../api/axiosInstance'
 
 function Header() {
   const { token } = useSelector((state) => state.auth);
@@ -14,9 +15,9 @@ function Header() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const studentResponse = await axios.get(`http://lms.tryasp.net/Student/count`);
-        const teacherResponse = await axios.get(`http://lms.tryasp.net/Teacher/count`);
-        const courseResponse = await axios.get(`http://lms.tryasp.net/Course/count`);
+        const studentResponse = await axios.get(`${baseURL}Student/count`);
+        const teacherResponse = await axios.get(`${baseURL}Teacher/count`);
+        const courseResponse = await axios.get(`${baseURL}Course/count`);
         console.log(courseResponse.data);
         setStudent(studentResponse.data);
         setTeacher(teacherResponse.data);

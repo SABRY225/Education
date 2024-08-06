@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import './Style.css';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import {baseURL} from '../../../api/axiosInstance'
 
 function Lecture() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -15,7 +16,7 @@ function Lecture() {
   
   useEffect(() => {
     const fetchFun= async()=>{
-       const res=await axios.get(`http://lms.tryasp.net/Lecture/all-in-course?courseId=${courseId}`,{
+       const res=await axios.get(`${baseURL}Lecture/all-in-course?courseId=${courseId}`,{
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
@@ -43,7 +44,7 @@ function Lecture() {
   const handleDelete = async() => {
     setLectures(Lectures.filter(course => course.id !== selectedCourse.id));
     handleCloseDeleteModal();
-    const res=await axios.delete(`http://lms.tryasp.net/Lecture?id=${selectedCourse.id}`,{
+    const res=await axios.delete(`${baseURL}Lecture?id=${selectedCourse.id}`,{
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'multipart/form-data',

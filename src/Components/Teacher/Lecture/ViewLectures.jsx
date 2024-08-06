@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import {baseURL} from '../../../api/axiosInstance'
 
 function ViewLectures() {
     const [lecture, setLecture] = useState('تفاضل وتكامل');
@@ -11,7 +12,7 @@ function ViewLectures() {
 
     useEffect(() => {
         const fetchFun = async () => {
-            const res = await axios.get(`http://lms.tryasp.net/Lecture/by-id?id=${lectureId}`, {
+            const res = await axios.get(`${baseURL}Lecture/by-id?id=${lectureId}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data',
@@ -39,7 +40,7 @@ function ViewLectures() {
                         {lecture.lectureUrl && (
                             <div className="viewVideo-2">
                                 <iframe
-                                    src={lecture.lectureUrl}
+                                    src={`${baseURL}${lecture.lectureUrl}`}
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowFullScreen
                                     title="YouTube video player"

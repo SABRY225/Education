@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import "../Lecture/Style.css"
+import {baseURL} from '../../../api/axiosInstance'
+
 function AddBook() {
   const { courseId } = useParams();
   const [BookURL, setBookURL] = useState(null);
@@ -36,7 +38,7 @@ function AddBook() {
     formDataToSend.append('Title', formData.Title);
 
     try {
-      const res = await axios.post('http://localhost:5177/Book', formDataToSend, {
+      const res = await axios.post(`${baseURL}Book`, formDataToSend, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',

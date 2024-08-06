@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserGraduate, faUserTie, faChalkboardTeacher, faBook } from '@fortawesome/free-solid-svg-icons';
+import {baseURL} from '../../api/axiosInstance'
 
 function Statistics() {
   const [studentsCount, setStudentsCount] = useState(0);
@@ -12,16 +13,16 @@ function Statistics() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const studentsCountRes = await axios.get('http://localhost:5177/Student/count');
+        const studentsCountRes = await axios.get(`${baseURL}Student/count`);
         setStudentsCount(studentsCountRes.data);
 
-        const enrolledStudentsCountRes = await axios.get('http://localhost:5177/Student/enrolled-count');
+        const enrolledStudentsCountRes = await axios.get(`${baseURL}Student/enrolled-count`);
         setEnrolledStudentsCount(enrolledStudentsCountRes.data);
 
-        const coursesCountRes = await axios.get('http://localhost:5177/Course/count');
+        const coursesCountRes = await axios.get(`${baseURL}Course/count`);
         setCoursesCount(coursesCountRes.data);
 
-        const teachersCountRes = await axios.get('http://localhost:5177/Teacher/count');
+        const teachersCountRes = await axios.get(`${baseURL}Teacher/count`);
         setTeachersCount(teachersCountRes.data);
       } catch (error) {
         console.error('Error fetching data', error);

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from 'react-redux';
+import {baseURL} from '../../api/axiosInstance'
 
 function Enrolling() {
   const [studentEmail, setStudentEmail] = useState('');
@@ -13,7 +14,7 @@ function Enrolling() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        'http://localhost:5177/Course/enroll',
+        `${baseURL}Course/enroll`,
         {},
         {
           headers: {

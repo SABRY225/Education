@@ -1,6 +1,7 @@
 // CourseCard.js
 import './CourseCard.css';
 import { Link, useNavigate } from 'react-router-dom';
+import {baseURL} from '../../api/axiosInstance'
 
 const CourseCard = ({ imgSrc, courseName, courseId, onEdit, onDelete }) => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const CourseCard = ({ imgSrc, courseName, courseId, onEdit, onDelete }) => {
     return (
         <>
             <div className="course-image">
-                <img src={`http://localhost:5177/${imgSrc}`} alt={courseName} />
+                <img src={`${baseURL}${imgSrc}`} alt={courseName} />
             </div>
             <h3 className="course-name">{courseName}</h3>
             <div className="course-actions">

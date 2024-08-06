@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchCurrentUser, updateUserImg, updateUserInfo } from '../../Redux/actions/authActions'; // Make sure to define these actions
 import { setInfoProfile } from '../../Redux/reducers/authSlice';
 import userImg from '../../assets/image.png';
+import {baseURL} from '../../api/axiosInstance'
 
 function Profile() {
     const firstNameFromState = useSelector((state) => state.auth.firstName);
@@ -123,7 +124,7 @@ function Profile() {
                 </div>
                 <div className="col-md-6">
                     <div className="col-md-12">
-                        <img src={userImage?`http://lms.tryasp.net${userImage}`:profileImage} alt="User" className="profile-image" />
+                        <img src={userImage?`${baseURL}${userImage}`:profileImage} alt="User" className="profile-image" />
                     </div>
 
                     {isEditingImage ? (

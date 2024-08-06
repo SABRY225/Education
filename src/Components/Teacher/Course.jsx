@@ -3,6 +3,7 @@ import './Course.css';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import {baseURL} from '../../api/axiosInstance'
 
 function Course() {
     const { courseId } = useParams();
@@ -16,7 +17,7 @@ function Course() {
     useEffect(() => {
         const fetchCourseData = async () => {
             try {
-                const response = await axios.get(`http://localhost:5177/Course/students-count-in-course?courseId=${courseId}`, {
+                const response = await axios.get(`${baseURL}Course/students-count-in-course?courseId=${courseId}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'multipart/form-data',
@@ -24,7 +25,7 @@ function Course() {
                 });
                 setStudent(response.data);
 
-                const response2 = await axios.get(`http://localhost:5177/Book/num-of-books?courseId=${courseId}`, {
+                const response2 = await axios.get(`${baseURL}Book/num-of-books?courseId=${courseId}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'multipart/form-data',
@@ -32,7 +33,7 @@ function Course() {
                 });
                 setBook(response2.data);
 
-                const response3 = await axios.get(`http://localhost:5177/Exam/num-of-exams?courseId=${courseId}`, {
+                const response3 = await axios.get(`${baseURL}Exam/num-of-exams?courseId=${courseId}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'multipart/form-data',
@@ -40,7 +41,7 @@ function Course() {
                 });
                 setExam(response3.data);
 
-                const response4 = await axios.get(`http://localhost:5177/Lecture/num-of-Lectures?courseId=${courseId}`, {
+                const response4 = await axios.get(`${baseURL}Lecture/num-of-Lectures?courseId=${courseId}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'multipart/form-data',
@@ -48,7 +49,7 @@ function Course() {
                 });
                 setLesson(response4.data);
 
-                const response5 = await axios.get(`http://localhost:5177/http://localhost:5177/Course/by-id?id=${courseId}`, {
+                const response5 = await axios.get(`${baseURL}Course/by-id?id=${courseId}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'multipart/form-data',

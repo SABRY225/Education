@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-
+import {baseURL} from '../../../api/axiosInstance'
 function AddLectures() {
   const { courseId } = useParams();
   const [formData, setFormData] = useState({
@@ -33,7 +33,7 @@ function AddLectures() {
     formDataToSend.append('Name', formData.Name);
 
     try {
-      const res = await axios.post('http://lms.tryasp.net/Lecture', formDataToSend, {
+      const res = await axios.post(`${baseURL}Lecture`, formDataToSend, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',

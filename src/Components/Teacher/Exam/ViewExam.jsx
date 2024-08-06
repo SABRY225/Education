@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import {baseURL} from '../../../api/axiosInstance'
 
 function ViewExam() {
   const { examId } = useParams();
@@ -11,7 +12,7 @@ function ViewExam() {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const response = await axios.get(`http://localhost:5177/Question/all-in-exam?examId=${examId}`, {
+        const response = await axios.get(`${baseURL}Question/all-in-exam?examId=${examId}`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import {baseURL} from '../../../api/axiosInstance'
 
 function ViewBook() {
     const [Book, setBook] = useState(null);
@@ -15,14 +16,14 @@ function ViewBook() {
     useEffect(() => {
         const fetchBook = async () => {
             try {
-                const res = await axios.get(`http://localhost:5177/Book/by-id?id=${bookId}`, {
+                const res = await axios.get(`${baseURL}Book/by-id?id=${bookId}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                     },
                 });
                 console.log(res.data);
                 setBook(res.data);
-                setBookSrc(`http://localhost:5177/${res.data.bookUrl}`);
+                setBookSrc(`${baseURL}${res.data.bookUrl}`);
             } catch (err) {
                 console.error("Error fetching book data:", err);
                 setError('Failed to fetch book data. Please try again later.');
@@ -58,7 +59,7 @@ function ViewBook() {
                             BookSrc && (
                                 <div className="viewBook">
                                     <iframe
-                                        src={BookSrc}
+                                        src={`${baseURL}${BookSrc}`}
                                         // allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                                         // allowFullScreen
                                         title="Embedded Book"

@@ -5,6 +5,7 @@ import { Modal, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import {useSelector } from 'react-redux';
 import axios from 'axios';
+import {baseURL} from '../../api/axiosInstance'
 
 function Dashboard() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -17,7 +18,7 @@ function Dashboard() {
 
   useEffect(() => {
     const fetchFun= async()=>{
-       const res=await axios.get(`http://localhost:5177/Course/teacher-courses?teacherId=${teacherId}`,{
+       const res=await axios.get(`${baseURL}Course/teacher-courses?teacherId=${teacherId}`,{
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
@@ -54,7 +55,7 @@ function Dashboard() {
     setCourses((prevCourses) => prevCourses.filter(course => course.id !== selectedCourse.id));
     const fetchCourseData = async () => {
       try {
-        await axios.delete(`http://localhost:5177/http://lms.tryasp.net/Course?id=${selectedCourse.id}`, {
+        await axios.delete(`${baseURL}Course?id=${selectedCourse.id}`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },

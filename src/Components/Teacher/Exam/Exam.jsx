@@ -5,6 +5,7 @@ import { Modal, Button } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 import '../Lecture/Style.css';
 import { useSelector } from 'react-redux';
+import {baseURL} from '../../../api/axiosInstance'
 
 function Exam() {
   const { courseId } = useParams();
@@ -17,7 +18,7 @@ function Exam() {
   useEffect(() => {
     const fetchExams = async () => {
       try {
-        const response = await axios.get(`http://localhost:5177/Exam/all-in-course?courseId=${courseId}`, {
+        const response = await axios.get(`${baseURL}Exam/all-in-course?courseId=${courseId}`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
@@ -49,7 +50,7 @@ function Exam() {
   const handleDelete = async () => {
     if (selectedExam) {
       try {
-        await axios.delete(`http://localhost:5177/Exam?id=${selectedExam.id}`, {
+        await axios.delete(`${baseURL}Exam?id=${selectedExam.id}`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },

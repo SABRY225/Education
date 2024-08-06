@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import userImg from '../../assets/image.png';
 import { useSelector, useDispatch } from 'react-redux';
 import { signOutUser } from '../../Redux/actions/authActions';
+import {baseURL} from '../../api/axiosInstance'
 
 function Navbar() {
     const firstName = useSelector((state) => state.auth.firstName);
@@ -41,7 +42,7 @@ function Navbar() {
                                     </div>
                                     <div className="NameUser">{firstName} {lastName}</div>
                                     <Link  to="/Teacher/profile">
-                                        <img src={imgUser?`http://lms.tryasp.net${imgUser}`:userImg} alt="User" style={{ width: "60px",height:"50px",borderRadius:"50%", marginLeft: "10px" }} />
+                                        <img src={imgUser?`${baseURL}${imgUser}`:userImg} alt="User" style={{ width: "60px",height:"50px",borderRadius:"50%", marginLeft: "10px" }} />
                                     </Link>
                                     <div className="logout-link" onClick={handleLogout}>
                                         تسجيل الخروج
@@ -59,7 +60,7 @@ function Navbar() {
                                     </div>
                                     <div className="NameUser">{firstName} {lastName}</div>
                                     <Link to="/Teacher/profile">
-                                        <img src={userImg} alt="User" style={{ width: "50px", marginLeft: "10px" }} />
+                                        <img src={`${baseURL}${userImg}`} alt="User" style={{ width: "50px", marginLeft: "10px" }} />
                                     </Link>
                                     <div className="logout-link" onClick={handleLogout}>
                                         تسجيل الخروج

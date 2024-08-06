@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './EditCourse.css';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import {baseURL} from '../../api/axiosInstance'
 
 function CreateCourse() {
   const token = useSelector((state) => state.auth.token);
@@ -48,7 +49,7 @@ function CreateCourse() {
       });
 
       // Send the data to the backend
-      const res = await axios.post('http://localhost:5177/Course', formDataToSend, {
+      const res = await axios.post(`${baseURL}Course`, formDataToSend, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
